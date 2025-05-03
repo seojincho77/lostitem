@@ -12,7 +12,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
     @Column(columnDefinition = "TEXT")
     private String content;
