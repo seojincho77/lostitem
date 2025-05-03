@@ -1,8 +1,8 @@
-package com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.Post;
-import com.example.demo.models.Users;
-import com.example.demo.repositories.PostRepository;
+import com.example.lostitem.models.Post;
+import com.example.lostitem.models.Users;
+import com.example.lostitem.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

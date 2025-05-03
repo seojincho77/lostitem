@@ -1,7 +1,7 @@
-ackage com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.LostItem;
-import com.example.demo.repositories.LostItemRepository;
+import com.example.lostitem.models.LostItem;
+import com.example.lostitem.repositories.LostItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

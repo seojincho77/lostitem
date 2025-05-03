@@ -1,6 +1,6 @@
-package com.example.demo.repositories;
+package com.example.lostitem.repositories;
 
-import com.example.demo.models.Locations;
+import com.example.lostitem.models.Locations;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,11 @@
-package com.example.demo.models;
-
+package com.example.lostitem.models;
+import com.example.lostitem.models.RequestStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.time.LocalDateTime;
+import java.util.List;
 @Entity
 @Table(name = "requests")
 public class Request {
@@ -29,13 +32,13 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user; // 작성자
+    private Users user; // 작성자
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
-    private User admin; // 관리자
+    private Users admin; // 관리자
 
     @ManyToOne
     @JoinColumn(name = "requester_id")
-    private User requester; // 요청자
+    private Users requester; // 요청자
 }

@@ -1,7 +1,7 @@
-package com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.Request;
-import com.example.demo.repositories.RequestRepository;
+import com.example.lostitem.models.Request;
+import com.example.lostitem.repositories.RequestRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

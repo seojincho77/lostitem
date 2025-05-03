@@ -1,9 +1,12 @@
-package com.example.demo.models;
+package com.example.lostitem.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.time.LocalDateTime;
+import java.util.List;
 @Entity
 @Table(name = "posts")
 public class Post {

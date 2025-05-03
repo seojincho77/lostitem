@@ -1,7 +1,7 @@
-package com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.Locations;
-import com.example.demo.repositories.LocationsRepository;
+import com.example.lostitem.models.Locations;
+import com.example.lostitem.repositories.LocationsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

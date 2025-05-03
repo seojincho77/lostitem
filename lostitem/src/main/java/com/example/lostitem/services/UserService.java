@@ -1,7 +1,7 @@
-package com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.Users;
-import com.example.demo.repositories.UsersRepository;
+import com.example.lostitem.models.Users;
+import com.example.lostitem.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,25 +9,25 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
 
-    public UserService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public List<Users> getAllUsers() {
-        return usersRepository.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<Users> getUserById(Integer id) {
-        return usersRepository.findById(id);
+        return userRepository.findById(id);
     }
 
     public Users saveUser(Users user) {
-        return usersRepository.save(user);
+        return userRepository.save(user);
     }
 
     public void deleteUser(Integer id) {
-        usersRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

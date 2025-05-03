@@ -1,8 +1,8 @@
-package com.example.demo.services;
+package com.example.lostitem.services;
 
-import com.example.demo.models.Comment;
-import com.example.demo.models.Post;
-import com.example.demo.repositories.CommentRepository;
+import com.example.lostitem.models.Comment;
+import com.example.lostitem.models.Post;
+import com.example.lostitem.repositories.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,4 +33,3 @@ public class CommentService {
         commentRepository.deleteById(id);
     }
 }
-

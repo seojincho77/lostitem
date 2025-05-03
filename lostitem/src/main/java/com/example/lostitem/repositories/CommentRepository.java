@@ -1,10 +1,10 @@
-package com.example.demo.repositories;
+package com.example.lostitem.repositories;
 
-import com.example.demo.models.Comment;
-import com.example.demo.models.Post;
+import com.example.lostitem.models.Comment;
+import com.example.lostitem.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-
+//DB 접근, 데이터 조회/저장/삭제
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     // 특정 게시글(post)에 달린 댓글 목록 가져오기
