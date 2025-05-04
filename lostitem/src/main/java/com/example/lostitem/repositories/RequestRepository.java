@@ -10,11 +10,14 @@ import java.util.List;
 public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     // 게시글 ID로 요청 목록 가져오기
-    List<Request> findByPostId(Integer postId);
+    List<Request> findByPost_PostId(Integer postId);
 
-    // 특정 사용자 ID로 요청 목록 가져오기
-    List<Request> findByUserId(Integer userId);
+    // 사용자 ID로 요청 목록 가져오기
+    List<Request> findByUser_UserId(Integer userId);
 
     // 관리자 ID로 요청 목록 가져오기
-    List<Request> findByAdminId(Integer adminId);
+    List<Request> findByAdmin_UserId(Integer adminId);
+
+    // 요청자 ID로 요청 목록 가져오기 (필요시)
+    List<Request> findByRequester_UserId(Integer requesterId);
 }

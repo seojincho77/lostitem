@@ -13,8 +13,9 @@ import java.util.List;
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;  // 이 필드로 검색
+
     private String userName;
     private String userEmail;
     private String userPassword;

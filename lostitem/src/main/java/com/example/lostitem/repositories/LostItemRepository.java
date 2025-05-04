@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface LostItemRepository extends JpaRepository<LostItem, Integer> {
 
     // 특정 게시글에 해당하는 분실물 찾기
-    LostItem findByPostId(Integer postId);
+    LostItem findByPost_PostId(Integer postId);
+
 }
