@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.*;
 public enum PostType {
     lost, found
 }

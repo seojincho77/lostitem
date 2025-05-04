@@ -6,8 +6,14 @@ import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.*;
 @Entity
 @Table(name = "lost_items")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class LostItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
