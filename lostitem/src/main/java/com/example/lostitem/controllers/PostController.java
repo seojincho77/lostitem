@@ -7,12 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PostController {
     @GetMapping("/lost-items")
     public String lostItems() {
-        return "form";
+        return "lost_list";
+    }
+
+    @GetMapping("/lost-items/new")
+    public String CreateLostItem() {
+        return "lost_registeration";
     }
 
     @GetMapping("/found-items")
     public String foundItems() {
-        return "form";
+        return "get_list";
+    }
+
+    @GetMapping("/found-items/new")
+    public String CreateFoundItem() {
+        return "get_registeration";
     }
 
 }
