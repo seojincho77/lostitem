@@ -17,17 +17,18 @@ import lombok.*;
 public class LostItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer lostId;
-
-    private String lostPlace;
-
-    private LocalDate lostDate;
-
-    private Boolean isRecovered;
-
-    private LocalDate createdAt;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Column(name = "lost_place")
+    private String lostPlace;
+
+    @Column(name = "lost_date")
+    private LocalDate lostDate;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

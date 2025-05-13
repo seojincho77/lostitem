@@ -17,18 +17,18 @@ import lombok.*;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer commentId;
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @Column(columnDefinition = "TEXT")
     private String content;
 
-    private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

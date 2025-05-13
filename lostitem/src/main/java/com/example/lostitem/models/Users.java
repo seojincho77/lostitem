@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
@@ -20,23 +21,23 @@ import lombok.*;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;  // 이 필드로 검색
+    private Integer id;
 
-    private String userName;
-    private String userEmail;
-    private String userPassword;
-    private Boolean isAdmin;
-    private LocalDateTime createdAt;
+    private String username;
+
+    private String email;
+
+    private String password;
+
+    @Column(name = "is_admin")
+    private Boolean isAdmin = false;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-
-    @OneToMany(mappedBy = "user")
-    private List<Request> requests;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Request> approvedRequests;
 }

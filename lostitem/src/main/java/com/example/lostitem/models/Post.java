@@ -18,38 +18,53 @@ import lombok.*;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer postId;
+    private Integer id;
 
     private String title;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "image_url")
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
-    private PostType postType;  // ENUM('lost', 'found')
+    @Column(name = "post_type")
+    private PostType postType; // Enum 타입 정의 필요
 
-    private String storageLocationId;
+    @ManyToOne
+    @JoinColumn(name = "storage_location_id")
+    private Locations storageLocation;
 
+    @Column(name = "found_place")
     private String foundPlace;
-
-    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 
+    /*@ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;*/
+
+    @Column(name = "is_recovered")
+    private Boolean isRecovered = false;
+
     @ManyToOne
-    @JoinColumn(name = "location_id2")
-    private Locations location;
+    @JoinColumn(name = "recovered_by_admin_id")
+    private Users recoveredByAdmin;
+
+    @Column(name = "recovered_at")
+    private LocalDateTime recoveredAt;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
+    private LostItem lostItem;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
-    @OneToOne(mappedBy = "post")
-    private LostItem lostItem;
-
-    @OneToMany(mappedBy = "post")
-    private List<Request> requests;
+    /*@OneToMany(mappedBy = "post")
+    private List<Reward> rewards;*/
 }

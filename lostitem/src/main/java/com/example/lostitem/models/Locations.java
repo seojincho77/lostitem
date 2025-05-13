@@ -18,14 +18,16 @@ import lombok.*;
 public class Locations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer locationId;
+    private Integer id;
 
-    private String locName;
+    private String name;
 
-    private Boolean isActive;
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
-    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "location")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "storageLocation")
+    private List<Post> storedPosts;
 }
