@@ -1,3 +1,4 @@
+/*
 package com.example.lostitem.services;
 
 import com.example.lostitem.models.Request;
@@ -30,4 +31,4 @@ public class RequestService {
     public void deleteRequest(Integer id) {
         requestRepository.deleteById(id);
     }
-}
+}*/

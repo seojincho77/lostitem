@@ -10,5 +10,5 @@ import java.util.List;
 public interface LocationsRepository extends JpaRepository<Locations, Integer> {
 
     // 장소 이름으로 검색 (부분 일치 포함)
-    List<Locations> findByLocNameContaining(String keyword);
+    List<Locations> findByNameContaining(String keyword);
 }

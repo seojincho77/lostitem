@@ -1,3 +1,4 @@
+/*
 package com.example.lostitem.models;
 import com.example.lostitem.models.RequestStatus;
 import jakarta.persistence.*;
@@ -48,3 +49,4 @@ public class Request {
     @JoinColumn(name = "requester_id")
     private Users requester; // 요청자
 }
+*/

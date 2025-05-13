@@ -19,7 +19,7 @@ public class LocationsService {
     }
 
     public List<Locations> searchByLocName(String keyword) {
-        return locationsRepository.findByLocNameContaining(keyword);
+        return locationsRepository.findByNameContaining(keyword);
     }
 
     public Locations saveLocation(Locations location) {

@@ -1,3 +1,4 @@
+/*
 package com.example.lostitem.repositories;
 
 import com.example.lostitem.models.Request;
@@ -20,4 +21,4 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     // 요청자 ID로 요청 목록 가져오기 (필요시)
     List<Request> findByRequester_UserId(Integer requesterId);
-}
+}*/
