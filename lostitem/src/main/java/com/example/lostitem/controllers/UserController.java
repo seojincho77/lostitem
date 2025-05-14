@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
+import java.util.Optional;
+
 
 @Controller
 public class UserController {
@@ -34,6 +36,12 @@ public class UserController {
         if (!password.equals(password2)) {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
             return "signup";  // 비밀번호가 일치하지 않으면 폼을 다시 보여줌
+        }
+
+        Optional<Users> already = userService.getUserByUserId(loginId);
+        if (already.isPresent()) {
+            model.addAttribute("error", "이미 존재하는 사용자 ID 입니다.");
+            return "signup";
         }
 
         // 비밀번호 일치하면 Users 객체를 생성하고, 회원가입 로직 추가
