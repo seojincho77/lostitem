@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public Optional<Users> getUserByUserId(String userId) {
-        return userRepository.findByUserId(userId);
+        return userRepository.findByLoginId(userId);
     }
 
     public Users saveUser(Users user) {

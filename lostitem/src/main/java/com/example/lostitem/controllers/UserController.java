@@ -2,6 +2,7 @@ package com.example.lostitem.controllers;
 
 import com.example.lostitem.models.Users;
 import com.example.lostitem.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +61,29 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(
+            @RequestParam String loginId,
+            @RequestParam String password,
+            Model model,
+            HttpSession session) {
+        Optional<Users> check = userService.getUserByUserId(loginId);
+
+        if(check.isEmpty()){
+            model.addAttribute("error", "존재하지 않는 사용자입니다.");
+            return "login";
+        }
+
+        if(!check.get().getPassword().equals(password)){
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "login";
+        }
+
+        session.setAttribute("user", check.get());
+
+        return "redirect:/";
     }
 }
 

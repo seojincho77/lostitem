@@ -15,5 +15,5 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     // 사용자 이름으로 사용자 찾기
     Optional<Users> findByUsername(String userName);
 
-    Optional<Users> findByUserId(String userId);
+    Optional<Users> findByLoginId(String userId);
 }
