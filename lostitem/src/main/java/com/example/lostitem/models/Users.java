@@ -27,7 +27,11 @@ public class Users {
 
     private String email;
 
+    private String loginId;
+
     private String password;
+
+    private String phone;
 
     @Column(name = "is_admin")
     private Boolean isAdmin = false;

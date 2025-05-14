@@ -1,13 +1,52 @@
 package com.example.lostitem.controllers;
 
+import com.example.lostitem.models.Users;
+import com.example.lostitem.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+
 
 @Controller
 public class UserController {
+    private final UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/register")
     public String register() {
         return "signup";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(
+            @RequestParam("loginId") String loginId,
+            @RequestParam("password") String password,
+            @RequestParam("password2") String password2,  // password2를 별도로 받음
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone,
+            Model model) {
+        // 비밀번호 확인
+        if (!password.equals(password2)) {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "signup";  // 비밀번호가 일치하지 않으면 폼을 다시 보여줌
+        }
+
+        // 비밀번호 일치하면 Users 객체를 생성하고, 회원가입 로직 추가
+        Users user = new Users();
+        user.setLoginId(loginId);
+        user.setPassword(password);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPhone(phone);
+
+        userService.saveUser(user);
+
+        return "redirect:/login";  // 회원가입 성공 시 로그인 페이지로 리다이렉트
     }
 
     @GetMapping("/login")
