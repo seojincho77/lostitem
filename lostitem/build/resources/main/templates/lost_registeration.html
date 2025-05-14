@@ -180,12 +180,6 @@
         <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
     </nav>
 </aside>
-<header class="header">
-    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
-    <div class="user-info" th:if="${user != null}">
-        <span th:text="'환영합니다, ' + ${user.username}"></span>
-    </div>
-</header>
 <div class="main-area">
     <div class="main-header">
         <div class="main-title">분실물 등록</div>

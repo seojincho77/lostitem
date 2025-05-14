@@ -414,7 +414,7 @@
 <div class="main-area">
   <div class="main-header">
     <div class="main-title">습득물 목록</div>
-    <button type="button" th:onclick="|location.href='@{/found-items/new}'|" class="register-btn">습득물 등록</button>
+    <button type="button" th:onclick="|location.href='@{/found-items/new}'|" class="register-btn" th:if="${user != null}">습득물 등록</button>
   </div>
 
   <div class="search-card">
