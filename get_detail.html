@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>습득물 상세정보</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f6f8fd;
+            color: #232946;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #232946;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 0 1rem 0;
+            min-height: 100vh;
+        }
+
+        .sidebar .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            color: #eebbc3;
+            letter-spacing: 1px;
+        }
+
+        .sidebar nav {
+            width: 100%;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #eebbc3;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            border-radius: 8px 0 0 8px;
+            transition: background 0.13s;
+        }
+
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #393e6e;
+            color: #fff;
+        }
+
+        .main-area {
+            flex: 1;
+            min-width: 0;
+            background: #f6f8fd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .detail-card {
+            background: #fff;
+            border-radius: 13px;
+            box-shadow: 0 2px 16px rgba(184, 193, 236, 0.13);
+            margin-top: 2.5rem;
+            width: 100%;
+            max-width: 900px;
+            min-width: 340px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .detail-header {
+            padding: 2rem 2.5rem 1.2rem 2.5rem;
+            border-bottom: 1.5px solid #ececec;
+        }
+
+        .detail-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #232946;
+            margin-bottom: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.37em 1.3em;
+            border-radius: 7px;
+            font-size: 1.01rem;
+            font-weight: 700;
+            border: none;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            background: #b8c1ec;
+            color: #232946;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge.returned {
+            background: #eebbc3;
+            color: #232946;
+        }
+
+        .detail-main {
+            display: flex;
+            flex-direction: row;
+            gap: 2.5rem;
+            padding: 2rem 2.5rem 1.2rem 2.5rem;
+            box-sizing: border-box;
+        }
+
+        .detail-img-area {
+            width: 260px;
+            height: 260px;
+            background: #ededed;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 1.13rem;
+            font-weight: 600;
+            text-align: center;
+            flex-shrink: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-info-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            font-size: 1.09rem;
+        }
+
+        .detail-info-item {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .detail-info-label {
+            min-width: 85px;
+            color: #393e6e;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-info-value {
+            color: #232946;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .detail-desc-wrap {
+            padding: 0 2.5rem 2.5rem 2.5rem;
+        }
+
+        .detail-desc-title {
+            font-size: 1.06rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #393e6e;
+        }
+
+        .detail-desc {
+            color: #232946;
+            font-size: 1.07rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn-row {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 2.5rem 2.5rem 2.5rem;
+        }
+
+        .back-btn {
+            padding: 0.85em 2.2em;
+            font-size: 1.13rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            background: #b8c1ec;
+            color: #232946;
+            transition: background 0.16s, color 0.16s;
+        }
+
+        .back-btn:hover {
+            background: #232946;
+            color: #fff;
+        }
+
+        .comment-card {
+            background: #fff;
+            border-radius: 13px;
+            box-shadow: 0 2px 16px rgba(184, 193, 236, 0.13);
+            width: 100%;
+            max-width: 900px;
+            min-width: 340px;
+            margin-top: 2.2rem;
+            margin-bottom: 2rem;
+            padding: 2.5rem 2.5rem 2.2rem 2.5rem;
+            box-sizing: border-box;
+        }
+
+        .comment-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #232946;
+        }
+
+        .comment-list {
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .comment-item {
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #ececec;
+            padding-bottom: 1.1rem;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            margin-right: 0.7em;
+            color: #232946;
+        }
+
+        .comment-date {
+            float: right;
+            color: #6b7280;
+            font-size: 0.98rem;
+            font-weight: 400;
+            margin-left: 1em;
+        }
+
+        .comment-content {
+            color: #232946;
+            margin-top: 0.2em;
+            font-size: 1.07rem;
+            clear: both;
+            word-break: break-word;
+        }
+
+        .comment-form-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            margin-top: 1.3rem;
+        }
+
+        .comment-input {
+            flex: 1;
+            font-size: 1.08rem;
+            padding: 0.9em 1em;
+            border: 1.5px solid #b8c1ec;
+            border-radius: 8px;
+            background: #f4f6fa;
+            color: #232946;
+            resize: none;
+            min-height: 50px;
+            font-family: inherit;
+            transition: border 0.15s, background 0.15s;
+        }
+
+        .comment-input:focus {
+            border-color: #eebbc3;
+            background: #fff;
+            outline: none;
+        }
+
+        .comment-submit-btn {
+            padding: 0.9em 2.2em;
+            background: #3396e0;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .comment-submit-btn:hover {
+            background: #1976c9;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-area {
+                padding: 0 0 2rem 0;
+            }
+
+            .detail-card,
+            .comment-card {
+                max-width: 98vw;
+                width: 98vw;
+            }
+
+            .detail-header,
+            .detail-main,
+            .detail-desc-wrap,
+            .back-btn-row,
+            .comment-card {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        #login-prompt {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+
+        #login-prompt a {
+            color: #3396e0;
+            text-decoration: none;
+        }
+
+        @media (max-width: 650px) {
+            .detail-main {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .detail-img-area {
+                width: 100%;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">Lost&Found</div>
+        <nav>
+            <a href="main.html">홈</a>
+            <a href="lost_list.html">분실물 목록</a>
+            <a href="get_list.html">습득물 목록</a>
+            <a href="login.html">로그인</a>
+            <a href="signup.html">회원가입</a>
+        </nav>
+    </aside>
+    <div class="main-area">
+        <div class="detail-card">
+            <div class="detail-header">
+                <div class="detail-title" id="item-name"></div>
+                <span class="badge" id="item-status"></span>
+            </div>
+            <div class="detail-main">
+                <div class="detail-img-area" id="item-img"></div>
+                <div class="detail-info-list">
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">습득일</div>
+                        <div class="detail-info-value" id="item-date"></div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">카테고리</div>
+                        <div class="detail-info-value" id="item-category"></div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">습득장소</div>
+                        <div class="detail-info-value" id="item-location"></div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">보관장소</div>
+                        <div class="detail-info-value" id="item-storage"></div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">습득자</div>
+                        <div class="detail-info-value" id="item-finder"></div>
+                    </div>
+                    <div class="detail-info-item">
+                        <div class="detail-info-label">상태</div>
+                        <div class="detail-info-value"><span class="badge" id="item-status-badge"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-desc-wrap">
+                <div class="detail-desc-title">상세 설명</div>
+                <div class="detail-desc" id="item-desc"></div>
+            </div>
+            <div class="back-btn-row">
+                <button class="back-btn" onclick="location.href='get_list.html'">습득물 목록으로</button>
+            </div>
+        </div>
+
+        <div class="comment-card">
+            <div class="comment-title">댓글</div>
+            <ul class="comment-list" id="comment-list">
+            </ul>
+            <form class="comment-form-row" id="comment-form" style="display: none;">
+                <textarea class="comment-input" id="comment-content" placeholder="댓글을 입력하세요" required></textarea>
+                <button type="submit" class="comment-submit-btn">등록</button>
+            </form>
+            <p id="login-prompt" style="display: none;">
+                댓글을 작성하려면 <a href="login.html">로그인</a>해주세요.
+            </p>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = urlParams.get('id');
+
+        function loadItemDetail() {
+            fetch(`/found-items/${itemId}`)
+                .then(res => res.json())
+                .then(item => {
+                    document.getElementById('item-name').textContent = item.name;
+                    document.getElementById('item-date').textContent = item.date;
+                    document.getElementById('item-category').textContent = item.category;
+                    document.getElementById('item-location').textContent = item.location;
+                    document.getElementById('item-storage').textContent = item.storage;
+                    document.getElementById('item-finder').textContent = item.finder;
+                    document.getElementById('item-status').textContent = item.status;
+                    document.getElementById('item-status-badge').textContent = item.status;
+                    document.getElementById('item-desc').textContent = item.desc;
+
+                    const statusClass = item.status === '반환완료' ? 'badge returned' : 'badge';
+                    document.getElementById('item-status').className = statusClass;
+                    document.getElementById('item-status-badge').className = statusClass;
+
+                    if (item.image_url) {
+                        document.getElementById('item-img').innerHTML = `<img src="${item.image_url}" alt="습득물 이미지" style="width:100%;height:auto;">`;
+                    }//이미지 부분 추가 수정 필요
+                })
+                .catch(() => alert('데이터 불러오기 실패'));
+        }
+
+        function loadComments() {
+            fetch(`/comments?item_id=${itemId}&type=get`)
+                .then(res => res.json())
+                .then(comments => {
+                    const container = document.getElementById('comment-list');
+                    container.innerHTML = '';
+                    comments.forEach(comment => {
+                        const li = document.createElement('li');
+                        li.className = 'comment-item';
+                        li.innerHTML = `
+                                <div>
+                                    <span class="comment-author">${comment.username}</span>
+                                    <span class="comment-date">${new Date(comment.date).toLocaleString()}</span>
+                                </div>
+                                <div class="comment-content">${comment.content}</div>
+                            `;
+                        container.appendChild(li);
+                    });
+                });
+        }
+
+        function checkLoginStatus() {
+            return localStorage.getItem('isLoggedIn') === 'true';
+        }
+        function toggleCommentForm() {
+            const isLoggedIn = checkLoginStatus();
+            document.getElementById('comment-form').style.display = isLoggedIn ? 'flex' : 'none';
+            document.getElementById('login-prompt').style.display = isLoggedIn ? 'none' : 'block';
+        }
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!checkLoginStatus()) {
+                alert('로그인이 필요합니다!');
+                return;
+            }
+            const data = {
+                item_id: itemId,
+                type: 'get',
+                content: document.getElementById('comment-content').value
+            };
+            // /comments 주소 통일화
+            fetch('/comments', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => {
+                    if (res.ok) {
+                        document.getElementById('comment-content').value = '';
+                        loadComments();
+                    }
+                });
+        });
+        toggleCommentForm();
+        loadItemDetail();
+        loadComments();
+    </script>
+</body>
+
+</html>
