@@ -169,96 +169,66 @@
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo">Lost&Found</div>
-    <nav>
-      <a th:href="@{/}">홈</a>
-      <a th:href="@{/lost-items}">분실물 목록</a>
-      <a th:href="@{/found-items}">습득물 목록</a>
-      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
-      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
-      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
-    </nav>
-  </aside>
-  <div class="main-area">
-    <div class="main-header">
-      <div class="main-title">습득물 등록</div>
-    </div>
-    <div class="form-card">
-      <form id="getForm">
-        <div class="form-group">
-          <label for="item-name">습득물명</label>
-          <input type="text" id="item-name" name="item-name" placeholder="예) 지갑, 노트북" required>
-        </div>
-        <div class="form-group">
-          <label for="category">카테고리</label>
-          <select id="category" name="category" required>
-            <option value="">카테고리 선택</option>
-            <option value="전자기기">전자기기</option>
-            <option value="의류/잡화">의류/잡화</option>
-            <option value="신분증/카드">신분증/카드</option>
-            <option value="서류/책">서류/책</option>
-            <option value="기타">기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="found-location">습득 장소</label>
-          <input type="text" id="found-location" name="found-location" placeholder="예) 도서관 2층, 학생식당" required>
-        </div>
-        <div class="form-group">
-          <label for="storage-location">보관장소</label>
-          <select id="storage-location" name="storage-location" required>
-            <option value="">보관장소 선택</option>
-            <option value="학생지원센터">학생지원센터</option>
-            <option value="경비실">경비실</option>
-            <option value="도서관 안내데스크">도서관 안내데스크</option>
-            <option value="기타">기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="found-date">습득일</label>
-          <input type="date" id="found-date" name="found-date" required>
-        </div>
-        <div class="form-group">
-          <label for="desc">특이사항/습득물 특징</label>
-          <textarea id="desc" name="desc" rows="3" placeholder="습득물의 특징 등"></textarea>
-        </div>
-        <div class="form-btn-row">
-          <button type="submit" class="submit-btn">등록하기</button>
-          <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
-        </div>
-      </form>
-    </div>
+<aside class="sidebar">
+  <div class="logo">Lost&Found</div>
+  <nav>
+    <a th:href="@{/}">홈</a>
+    <a th:href="@{/lost-items}">분실물 목록</a>
+    <a th:href="@{/found-items}">습득물 목록</a>
+    <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+    <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+    <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
+  </nav>
+</aside>
+<div class="main-area">
+  <div class="main-header">
+    <div class="main-title">습득물 등록</div>
   </div>
-  <script>
-    document.getElementById('getForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const data = {
-        name: document.getElementById('item-name').value,
-        category: document.getElementById('category').value,
-        found_location: document.getElementById('found-location').value,
-        storage_location: document.getElementById('storage-location').value,
-        found_date: document.getElementById('found-date').value,
-        desc: document.getElementById('desc').value
-      };
-      fetch('/found-items', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(result => {
-        if(result.success){
-          alert('등록 완료!');
-          window.location.href = 'get_list.html';
-        } else {
-          alert('등록 실패!');
-        }
-      })
-      .catch(() => {
-        alert('서버 오류로 등록에 실패했습니다.');
-      });
-    });
-  </script>
+  <div class="form-card">
+    <form>
+      <div class="form-group">
+        <label for="item-name">습득물명</label>
+        <input type="text" id="item-name" name="item-name" placeholder="예) 지갑, 노트북" required>
+      </div>
+      <div class="form-group">
+        <label for="category">카테고리</label>
+        <select id="category" name="category" required>
+          <option value="">카테고리 선택</option>
+          <option value="전자기기">전자기기</option>
+          <option value="의류/잡화">의류/잡화</option>
+          <option value="신분증/카드">신분증/카드</option>
+          <option value="서류/책">서류/책</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lost-location">습득 장소</label>
+        <input type="text" id="lost-location" name="lost-location" placeholder="예) 도서관 2층, 학생식당" required>
+      </div>
+      <div class="form-group">
+        <label for="storage-location">보관장소</label>
+        <select id="storage-location" name="storage-location" required>
+          <option value="">보관장소 선택</option>
+          <option value="학생지원센터">학생지원센터</option>
+          <option value="경비실">경비실</option>
+          <option value="도서관 안내데스크">도서관 안내데스크</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lost-date">습득일</label>
+        <input type="date" id="lost-date" name="lost-date" required>
+      </div>
+      <div class="form-group">
+        <label for="desc">특이사항/습득물 특징</label>
+        <textarea id="desc" name="desc" rows="3" placeholder="습득물의 특징 등"></textarea>
+      </div>
+      <div class="form-btn-row">
+        <button type="submit" class="submit-btn">등록하기</button>
+        <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+      </div>
+    </form>
+  </div>
+</div>
 </body>
 </html>
