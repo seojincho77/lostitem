@@ -355,8 +355,8 @@
     }
     .user-info {
       position: absolute;
-      top: 2.7rem;
-      right: 3.5rem;
+      top: 1.7rem;
+      right: 1.5rem;
       background: none;
       color: #393e6e;
       font-size: 0.98rem;
@@ -364,8 +364,9 @@
       letter-spacing: 0.01em;
       margin: 0;
       padding: 0;
-      z-index: 20;
+      z-index: 30;
       opacity: 0.85;
+      pointer-events: none; /* 버튼 겹침 방지 필요시 */
     }
     .user-info span {
       color: #393e6e;
@@ -385,7 +386,7 @@
       .search-filters { gap: 10px; }
       .user-info {
         top: 1.2rem;
-        right: 1rem;
+        right: 0.7rem;
         font-size: 0.93rem;
       }
     }
