@@ -137,6 +137,29 @@
       background: #eebbc3;
       color: #232946;
     }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      background: #e9eefd;
+      border-radius: 12px;
+      padding: 0.9em 1.7em;
+      margin-bottom: 2.2rem;
+      margin-left: 0.2rem;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: #232946;
+      letter-spacing: 0.01em;
+      border-left: 5px solid #b8c1ec;
+      border-top: 1.5px solid #eebbc3;
+    }
+    .user-info span {
+      color: #393e6e;
+      font-weight: 800;
+      font-size: 1.13em;
+      letter-spacing: 0.03em;
+    }
     @media (max-width: 900px) {
       .sidebar { display: none; }
       .main { padding: 1rem 1rem; }
@@ -155,13 +178,11 @@
     <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
   </nav>
 </aside>
-<header class="header">
-  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
+<main class="main">
+    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
   <div class="user-info" th:if="${user != null}">
     <span th:text="'환영합니다, ' + ${user.username}"></span>
   </div>
-</header>
-<main class="main">
   <div class="headline">최근 등록된 분실/습득물</div>
   <section class="list-section">
     <table class="item-list" id="item-list">
