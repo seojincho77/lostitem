@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
       display: flex;
       min-height: 100vh;
     }
+
     .sidebar {
       width: 220px;
       background: #232946;
@@ -23,6 +25,7 @@
       padding: 2.5rem 0 1rem 0;
       min-height: 100vh;
     }
+
     .sidebar .logo {
       font-size: 1.6rem;
       font-weight: 800;
@@ -30,9 +33,11 @@
       color: #eebbc3;
       letter-spacing: 1px;
     }
+
     .sidebar nav {
       width: 100%;
     }
+
     .sidebar nav a {
       display: block;
       color: #eebbc3;
@@ -43,11 +48,13 @@
       border-radius: 8px 0 0 8px;
       transition: background 0.13s;
     }
+
     .sidebar nav a.active,
     .sidebar nav a:hover {
       background: #393e6e;
       color: #fff;
     }
+
     .main-area {
       flex: 1;
       background: #f6f8fd;
@@ -58,6 +65,7 @@
       align-items: flex-start;
       box-sizing: border-box;
     }
+
     .main-header {
       width: 100%;
       max-width: 1100px;
@@ -68,6 +76,7 @@
       margin: 0 0 2.5rem 3rem;
       box-sizing: border-box;
     }
+
     .main-title {
       font-size: 1.6rem;
       font-weight: 800;
@@ -75,6 +84,7 @@
       letter-spacing: 1px;
       margin-left: 0.2rem;
     }
+
     .register-btn {
       padding: 0.7em 1.7em;
       font-size: 1.08rem;
@@ -85,16 +95,18 @@
       border-radius: 9px;
       cursor: pointer;
       transition: background 0.18s;
-      box-shadow: 0 1px 4px rgba(184,193,236,0.13);
+      box-shadow: 0 1px 4px rgba(184, 193, 236, 0.13);
     }
+
     .register-btn:hover {
       background: #232946;
       color: #fff;
     }
+
     .search-card {
       background: #fff;
       border-radius: 18px;
-      box-shadow: 0 2px 16px rgba(184,193,236,0.13);
+      box-shadow: 0 2px 16px rgba(184, 193, 236, 0.13);
       padding: 2.1rem 2.5rem 1.5rem 2.5rem;
       margin: 0 0 2.2rem 3rem;
       width: calc(100% - 5rem);
@@ -105,6 +117,7 @@
       align-items: stretch;
       box-sizing: border-box;
     }
+
     .search-bar {
       display: flex;
       width: 100%;
@@ -115,6 +128,7 @@
       margin-bottom: 18px;
       box-sizing: border-box;
     }
+
     .search-bar input[type="text"] {
       flex: 1;
       padding: 1.1rem 1.3rem;
@@ -125,11 +139,13 @@
       outline: none;
       font-family: inherit;
     }
+
     .search-bar input[type="text"]::placeholder {
       color: #bcbcbc;
       font-size: 1.11rem;
       font-weight: 400;
     }
+
     .search-bar button {
       background: #b8c1ec;
       color: #232946;
@@ -142,10 +158,12 @@
       border-radius: 0 8px 8px 0;
       font-family: inherit;
     }
+
     .search-bar button:hover {
       background: #232946;
       color: #fff;
     }
+
     .search-filters {
       display: flex;
       gap: 14px;
@@ -154,6 +172,7 @@
       flex-wrap: wrap;
       box-sizing: border-box;
     }
+
     .search-filters select,
     .search-filters input[type="text"] {
       appearance: none;
@@ -171,21 +190,24 @@
       flex: 1;
       box-sizing: border-box;
     }
+
     .search-filters select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23232946' d='M6 8.825L1.175 4 2.05 3.125l3.95 3.95 3.95-3.95L10.825 4z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 1em center;
       padding-right: 2.5em;
     }
+
     .search-filters select:focus,
     .search-filters input[type="text"]:focus {
       border-color: #b8c1ec;
       background-color: #fff;
     }
+
     .list-card {
       background: #fff;
       border-radius: 18px;
-      box-shadow: 0 2px 16px rgba(184,193,236,0.13);
+      box-shadow: 0 2px 16px rgba(184, 193, 236, 0.13);
       padding: 2.1rem 2.5rem 2.1rem 2.5rem;
       width: calc(100% - 5rem);
       max-width: 1100px;
@@ -196,7 +218,8 @@
       margin: 0 0 2.5rem 3rem;
       box-sizing: border-box;
     }
-    .lost-list {
+
+    .get-list {
       display: flex;
       flex-direction: column;
       gap: 1.4rem;
@@ -205,22 +228,25 @@
       padding: 0;
       box-sizing: border-box;
     }
-    .lost-card {
+
+    .get-card {
       display: flex;
       align-items: stretch;
       background: #f6f8fd;
       border-radius: 14px;
-      box-shadow: 0 1px 6px rgba(184,193,236,0.10);
+      box-shadow: 0 1px 6px rgba(184, 193, 236, 0.10);
       border: 1.5px solid #ececec;
       min-height: 120px;
       overflow: hidden;
       transition: box-shadow 0.15s, background 0.15s;
       box-sizing: border-box;
     }
-    .lost-card:hover {
-      box-shadow: 0 4px 18px rgba(184,193,236,0.17);
+
+    .get-card:hover {
+      box-shadow: 0 4px 18px rgba(184, 193, 236, 0.17);
       background: #e9eefd;
     }
+
     .card-img-area {
       width: 160px;
       min-width: 110px;
@@ -236,6 +262,7 @@
       padding: 0 0.5rem;
       box-sizing: border-box;
     }
+
     .card-content {
       flex: 1;
       display: flex;
@@ -246,6 +273,7 @@
       gap: 1.2rem;
       box-sizing: border-box;
     }
+
     .card-main-info {
       display: flex;
       flex-direction: column;
@@ -253,22 +281,26 @@
       justify-content: center;
       min-width: 0;
     }
+
     .card-title {
       font-weight: 800;
       font-size: 1.17rem;
       margin-bottom: 0.1rem;
       color: #232946;
     }
+
     .card-date,
     .card-location {
       font-size: 1.04rem;
       color: #232946;
       word-break: break-word;
     }
+
     .card-label {
       font-weight: 700;
       color: #232946;
     }
+
     .card-sub-info {
       display: flex;
       flex-direction: column;
@@ -277,12 +309,14 @@
       align-items: flex-start;
       min-width: 190px;
     }
+
     .card-category,
     .card-keep-location {
       font-size: 1.04rem;
       color: #232946;
       word-break: break-word;
     }
+
     .badge {
       display: inline-block;
       margin-top: 0.7rem;
@@ -294,14 +328,17 @@
       letter-spacing: 0.5px;
       white-space: nowrap;
     }
+
     .badge.keep {
       background: #b8c1ec;
       color: #232946;
     }
+
     .badge.returned {
       background: #eebbc3;
       color: #232946;
     }
+
     .pagination-wrap {
       display: flex;
       justify-content: center;
@@ -310,6 +347,7 @@
       margin-bottom: 1rem;
       width: 100%;
     }
+
     .pagination {
       display: flex;
       gap: 0.5rem;
@@ -318,9 +356,11 @@
       margin: 0;
       list-style: none;
     }
+
     .pagination li {
       display: inline-block;
     }
+
     .pagination button {
       min-width: 40px;
       height: 40px;
@@ -335,47 +375,97 @@
       margin: 0;
       outline: none;
     }
+
     .pagination button.active,
     .pagination button:focus {
       background: #b8c1ec;
       color: #232946;
       border-color: #b8c1ec;
     }
+
     .pagination button:hover:not(.active) {
       background: #e6f3fc;
       color: #232946;
       border-color: #b8c1ec;
     }
+
     .pagination button[disabled] {
       background: #f3f3f3;
       color: #bbb;
       border-color: #ececec;
       cursor: not-allowed;
     }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+    }
+
+    .status-keeping {
+      background: #b8c1ec;
+      color: #232946;
+    }
+
+    .status-returned {
+      background: #eebbc3;
+      color: #232946;
+    }
+
     @media (max-width: 1200px) {
+
       .main-header,
       .search-card,
-      .list-card { max-width: 98vw; width: 98vw; }
+      .list-card {
+        max-width: 98vw;
+        width: 98vw;
+      }
     }
+
     @media (max-width: 900px) {
-      .sidebar { display: none; }
-      .main-area { padding: 0 0 2rem 0; }
-      .main-header { max-width: 98vw; padding: 2.5rem 1rem 0 1rem; }
-      .search-card, .list-card { width: 98vw; max-width: 98vw; padding: 1.5rem; }
-      .search-filters { gap: 10px; }
+      .sidebar {
+        display: none;
+      }
+
+      .main-area {
+        padding: 0 0 2rem 0;
+      }
+
+      .main-header {
+        max-width: 98vw;
+        padding: 2.5rem 1rem 0 1rem;
+      }
+
+      .search-card,
+      .list-card {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 1.5rem;
+      }
+
+      .search-filters {
+        gap: 10px;
+      }
     }
+
     @media (max-width: 768px) {
       .card-content {
         flex-direction: column;
         gap: 0.7rem;
       }
+
       .card-sub-info {
         min-width: 0;
         max-width: 100%;
       }
     }
+
     @media (max-width: 600px) {
-      .lost-card { flex-direction: column; }
+      .get-card {
+        flex-direction: column;
+      }
+
       .card-img-area {
         width: 100%;
         min-width: 0;
@@ -383,131 +473,131 @@
         border-bottom: 1.5px solid #ececec;
         padding: 0.7rem 0;
       }
+
       .search-filters select,
       .search-filters input[type="text"] {
         width: 100%;
       }
+
       .main-header,
       .search-card,
-      .list-card { padding-left: 0.5rem; padding-right: 0.5rem;}
+      .list-card {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
-<aside class="sidebar">
-  <div class="logo">Lost&Found</div>
-  <nav>
-    <a th:href="@{/}">홈</a>
-    <a th:href="@{/lost-items}">분실물 목록</a>
-    <a th:href="@{/found-items}">습득물 목록</a>
-    <a th:href="@{/login}" th:if="${user == null}">로그인</a>
-    <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
-    <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
-  </nav>
-</aside>
-<header class="header">
-  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
-  <div class="user-info" th:if="${user != null}">
-    <span th:text="'환영합니다, ' + ${user.username}"></span>
-  </div>
-</header>
-<div class="main-area">
-  <div class="main-header">
-    <div class="main-title">습득물 목록</div>
-    <button type="button" th:onclick="|location.href='@{/found-items/new}'|" class="register-btn" th:if="${user != null}">습득물 등록</button>
-  </div>
-
-  <div class="search-card">
-    <form class="search-bar" autocomplete="off">
-      <input type="text" placeholder="습득물을 검색하세요..." />
-      <button type="submit">검색</button>
-    </form>
-    <div class="search-filters">
-      <select id="date-filter">
-        <option>날짜별</option>
-        <option>오늘</option>
-        <option>이번주</option>
-        <option>이번달</option>
-        <option>올해</option>
-      </select>
-      <select>
-        <option>카테고리</option>
-        <option>전자기기</option>
-        <option>의류/잡화</option>
-        <option>신분증/카드</option>
-        <option>서류/책</option>
-        <option>기타</option>
-      </select>
-      <input type="text" placeholder="습득장소 직접입력" />
-      <select>
-        <option>상태</option>
-        <option>보관중</option>
-        <option>반환완료</option>
-      </select>
+  <aside class="sidebar">
+    <div class="logo">Lost&Found</div>
+    <nav>
+      <a th:href="@{/}">홈</a>
+      <a th:href="@{/lost-items}">분실물 목록</a>
+      <a th:href="@{/found-items}">습득물 목록</a>
+      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
+    </nav>
+  </aside>
+  <header class="header">
+    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
+    <div class="user-info" th:if="${user != null}">
+      <span th:text="'환영합니다, ' + ${user.username}"></span>
     </div>
-  </div>
+  </header>
 
-  <div class="list-card">
-    <div class="lost-list">
-      <div class="lost-card">
-        <div class="card-img-area">이미지</div>
-        <div class="card-content">
-          <div class="card-main-info">
-            <div class="card-title">노트북</div>
-            <div class="card-date"><span class="card-label">습득일:</span> 2025-04-05</div>
-            <div class="card-location"><span class="card-label">습득장소:</span> 공학관 201호</div>
-            <span class="badge keep">보관중</span>
-          </div>
-          <div class="card-sub-info">
-            <div class="card-category"><span class="card-label">카테고리:</span> 전자기기</div>
-            <div class="card-keep-location"><span class="card-label">보관장소:</span> 학생지원센터</div>
-          </div>
-        </div>
-      </div>
+  <div class="main-area">
+    <div class="main-header">
+      <div class="main-title">습득물 목록</div>
+      <button type="button" th:onclick="|location.href='@{/found-items/new}'|" class="register-btn"
+        th:if="${user != null}">습득물 등록</button>
+    </div>
 
-      <div class="lost-card">
-        <div class="card-img-area">이미지</div>
-        <div class="card-content">
-          <div class="card-main-info">
-            <div class="card-title">지갑</div>
-            <div class="card-date"><span class="card-label">습득일:</span> 2025-04-04</div>
-            <div class="card-location"><span class="card-label">습득장소:</span> 도서관 2층</div>
-            <span class="badge keep">보관중</span>
-          </div>
-          <div class="card-sub-info">
-            <div class="card-category"><span class="card-label">카테고리:</span> 의류/잡화</div>
-            <div class="card-keep-location"><span class="card-label">보관장소:</span> 도서관 안내데스크</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lost-card">
-        <div class="card-img-area">이미지</div>
-        <div class="card-content">
-          <div class="card-main-info">
-            <div class="card-title">학생증</div>
-            <div class="card-date"><span class="card-label">습득일:</span> 2025-04-03</div>
-            <div class="card-location"><span class="card-label">습득장소:</span> 학생식당</div>
-            <span class="badge returned">반환완료</span>
-          </div>
-          <div class="card-sub-info">
-            <div class="card-category"><span class="card-label">카테고리:</span> 신분증/카드</div>
-            <div class="card-keep-location"><span class="card-label">보관장소:</span> 학생지원센터</div>
-          </div>
-        </div>
+    <div class="search-card">
+      <form class="search-bar" autocomplete="off">
+        <input type="text" placeholder="습득물을 검색하세요..." />
+        <button type="submit">검색</button>
+      </form>
+      <div class="search-filters">
+        <select id="date-filter">
+          <option>날짜별</option>
+          <option>오늘</option>
+          <option>이번주</option>
+          <option>이번달</option>
+          <option>올해</option>
+        </select>
+        <select>
+          <option>카테고리</option>
+          <option>전자기기</option>
+          <option>의류/잡화</option>
+          <option>신분증/카드</option>
+          <option>서류/책</option>
+          <option>기타</option>
+        </select>
+        <input type="text" placeholder="습득장소 직접입력" />
+        <select>
+          <option>상태</option>
+          <option>보관중</option>
+          <option>반환완료</option>
+        </select>
       </div>
     </div>
 
-    <div class="pagination-wrap">
-      <ul class="pagination">
-        <li><button title="이전 페이지" disabled>&lt;</button></li>
-        <li><button class="active">1</button></li>
-        <li><button>2</button></li>
-        <li><button>3</button></li>
-        <li><button title="다음 페이지">&gt;</button></li>
-      </ul>
+    <div class="list-card">
+      <div id="get-list" class="get-list"></div>
+
+      <div class="pagination-wrap">
+        <ul class="pagination">
+          <li><button title="이전 페이지" disabled>&lt;</button></li>
+          <li><button class="active">1</button></li>
+          <li><button>2</button></li>
+          <li><button>3</button></li>
+          <li><button title="다음 페이지">&gt;</button></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      fetch('/found-items')
+        .then(res => res.json())
+        .then(list => {
+          const container = document.getElementById('get-list');
+          container.innerHTML = '';
+          if (!list.length) {
+            container.innerHTML = '<div style="padding:2rem;text-align:center;color:#aaa;">등록된 습득물이 없습니다.</div>';
+            return;
+          }
+          list.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'get-card';
+            card.innerHTML = `
+              <div class="card-img-area">이미지</div>
+              <div class="card-content">
+                <div class="card-main-info">
+                  <div class="card-title">${item.name || ''}</div>
+                  <div class="card-date"><span class="card-label">습득일:</span> ${item.found_date || ''}</div>
+                  <div class="card-location"><span class="card-label">습득장소:</span> ${item.found_location || ''}</div>
+                  <span class="badge ${item.status === '반환완료' ? 'returned' : 'keep'}">${item.status || '보관중'}</span>
+                </div>
+                <div class="card-sub-info">
+                  <div class="card-category"><span class="card-label">카테고리:</span> ${item.category || ''}</div>
+                  <div class="card-keep-location"><span class="card-label">보관장소:</span> ${item.storage_location || ''}</div>
+                  <div class="card-detail"><span class="card-label">세부사항:</span> ${item.desc || ''}</div>
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(() => {
+          document.getElementById('get-list').innerHTML =
+            '<div style="padding:2rem;text-align:center;color:#aaa;">습득물 목록을 불러오지 못했습니다.</div>';
+        });
+    });
+  </script>
 </body>
+
 </html>
