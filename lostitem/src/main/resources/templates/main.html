@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Noto Sans KR';
-      background: #f6f8fd;
+      background: #f4f6fa;
       color: #232946;
       display: flex;
       min-height: 100vh;
@@ -21,6 +21,7 @@
       align-items: center;
       padding: 2.5rem 0 1rem 0;
       min-height: 100vh;
+      flex-shrink: 0;
     }
     .sidebar .logo {
       font-size: 1.6rem;
@@ -47,9 +48,20 @@
       background: #393e6e;
       color: #fff;
     }
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .header {
+      background: transparent;
+      padding: 1rem 3vw 0 3vw;
+      margin: 0;
+    }
     .main {
       flex: 1;
-      padding: 2.5rem 3vw 2rem 3vw;
+      padding: 1rem 3vw 2rem 3vw;
       display: flex;
       flex-direction: column;
       min-width: 0;
@@ -62,10 +74,11 @@
     }
     .list-section {
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       padding: 0;
       overflow: hidden;
       margin-bottom: 2rem;
+      border-radius: 8px;
     }
     .item-list {
       width: 100%;
@@ -77,8 +90,8 @@
       text-align: left;
     }
     .item-list th {
-      background: #f4f6fa;
-      color: #393e6e;
+      background: #eef1f6;
+      color: #232946;
       font-size: 1.1rem;
       font-weight: 800;
     }
@@ -139,19 +152,22 @@
     }
     .user-info {
       display: inline-block;
-      background: #f4f6fa;
-      color: #1976d2;
+      background: #eef1f6;
+      color: #232946;
       font-weight: 700;
       font-size: 1.1rem;
       border-radius: 8px;
       padding: 0.7em 1.5em;
-      margin-bottom: 1.5rem;
-      margin-left: 0.5rem;
+      margin-bottom: 1rem;
       box-shadow: 0 1px 4px rgba(44,62,80,0.07);
+    }
+    .user-info span {
+      color: #1976d2;
     }
     @media (max-width: 900px) {
       .sidebar { display: none; }
       .main { padding: 1rem 1rem; }
+      .header { padding: 1rem 1rem 0 1rem; }
     }
   </style>
 </head>
@@ -167,58 +183,60 @@
     <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
   </nav>
 </aside>
-<header class="header">
-  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
-  <div class="user-info" th:if="${user != null}">
-    <span th:text="'환영합니다, ' + ${user.username}"></span>
-  </div>
-</header>
-<main class="main">
-  <div class="headline">최근 등록된 분실/습득물</div>
-  <section class="list-section">
-    <table class="item-list" id="item-list">
-      <thead>
-      <tr>
-        <th>이미지</th>
-        <th>구분</th>
-        <th>물품명</th>
-        <th>카테고리</th>
-        <th>장소</th>
-        <th>등록일</th>
-        <th>상태</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type found">습득물</span></td>
-        <td><span class="item-name">노트북</span></td>
-        <td><span class="item-detail">전자기기</span></td>
-        <td>공학관 201호</td>
-        <td>2025-04-05</td>
-        <td><span class="status-badge">보관중</span></td>
-      </tr>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type found">습득물</span></td>
-        <td><span class="item-name">지갑</span></td>
-        <td><span class="item-detail">의류/잡화</span></td>
-        <td>도서관 2층</td>
-        <td>2025-04-04</td>
-        <td><span class="status-badge">보관중</span></td>
-      </tr>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type lost">분실물</span></td>
-        <td><span class="item-name">학생증</span></td>
-        <td><span class="item-detail">신분증/카드</span></td>
-        <td>학생회관 식당</td>
-        <td>2025-04-03</td>
-        <td><span class="status-badge status-returned">완료</span></td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
-</main>
+<div class="content-wrapper">
+  <header class="header">
+    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
+    <div class="user-info" th:if="${user != null}">
+      <span th:text="'환영합니다, ' + ${user.username}"></span>
+    </div>
+  </header>
+  <main class="main">
+    <div class="headline">최근 등록된 분실/습득물</div>
+    <section class="list-section">
+      <table class="item-list" id="item-list">
+        <thead>
+        <tr>
+          <th>이미지</th>
+          <th>구분</th>
+          <th>물품명</th>
+          <th>카테고리</th>
+          <th>장소</th>
+          <th>등록일</th>
+          <th>상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><div class="item-img">이미지</div></td>
+          <td><span class="item-type found">습득물</span></td>
+          <td><span class="item-name">노트북</span></td>
+          <td><span class="item-detail">전자기기</span></td>
+          <td>공학관 201호</td>
+          <td>2025-04-05</td>
+          <td><span class="status-badge">보관중</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-img">이미지</div></td>
+          <td><span class="item-type found">습득물</span></td>
+          <td><span class="item-name">지갑</span></td>
+          <td><span class="item-detail">의류/잡화</span></td>
+          <td>도서관 2층</td>
+          <td>2025-04-04</td>
+          <td><span class="status-badge">보관중</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-img">이미지</div></td>
+          <td><span class="item-type lost">분실물</span></td>
+          <td><span class="item-name">학생증</span></td>
+          <td><span class="item-detail">신분증/카드</span></td>
+          <td>학생회관 식당</td>
+          <td>2025-04-03</td>
+          <td><span class="status-badge status-returned">완료</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
 </body>
 </html>
