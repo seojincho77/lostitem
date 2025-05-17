@@ -31,4 +31,7 @@ public class LostItem {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    private CategoryType category;
 }

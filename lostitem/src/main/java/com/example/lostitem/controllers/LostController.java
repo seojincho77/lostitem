@@ -1,9 +1,6 @@
 package com.example.lostitem.controllers;
 
-import com.example.lostitem.models.LostItem;
-import com.example.lostitem.models.Post;
-import com.example.lostitem.models.PostType;
-import com.example.lostitem.models.Users;
+import com.example.lostitem.models.*;
 import com.example.lostitem.services.LostItemService;
 import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
@@ -48,6 +45,7 @@ public class LostController {
             @RequestParam("lostPlace") String lostPlace,
             @RequestParam("lostDate") LocalDate lostDate,
             @RequestParam("description") String description,
+            @RequestParam("category") CategoryType category,
             HttpSession session,
             Model model) {
         Users user = (Users) session.getAttribute("user");
@@ -63,6 +61,7 @@ public class LostController {
         LostItem lostitem = new LostItem();
         lostitem.setLostPlace(lostPlace);
         lostitem.setLostDate(lostDate);
+        lostitem.setCategory(category);
 
         lostitem.setPost(post);
         post.setLostItem(lostitem);

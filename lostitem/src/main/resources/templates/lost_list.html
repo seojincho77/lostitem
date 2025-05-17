@@ -489,11 +489,14 @@
             <span class="card-label">등록자:</span>
             <span th:text="${post.user.username}">홍길동</span>
           </div>
-          <div class="card-keep-location">
+          <!--<div class="card-keep-location">
             <span class="card-label">설명:</span>
             <span th:text="${post.description}">검정색 지갑입니다.</span>
+          </div>-->
+          <div class="card-category">
+            <span class="card-label">카테고리:</span>
+            <span th:text="${post.lostItem.category}">검정색 지갑입니다.</span>
           </div>
-<!--            <div class="card-category"><span class="card-label">카테고리:</span> 없음</div>-->
           <div class="badge keep">분실</div>
         </div>
       </div>
