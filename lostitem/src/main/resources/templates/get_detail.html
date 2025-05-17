@@ -369,19 +369,23 @@
         </div>
         <div class="detail-info-list">
           <div class="detail-info-item">
-            <div class="detail-info-label">분실일</div>
-            <div class="detail-info-value" id="lost_date">{{lost_item.lost_date}}</div>
+            <div class="detail-info-label">습득일</div>
+            <div class="detail-info-value" id="created_at">{{post.created_at}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
             <div class="detail-info-value" id="category_id">{{category_name}}</div>
           </div>
           <div class="detail-info-item">
-            <div class="detail-info-label">분실장소</div>
-            <div class="detail-info-value" id="lost_place">{{lost_item.lost_place}}</div>
+            <div class="detail-info-label">습득장소</div>
+            <div class="detail-info-value" id="found_place">{{post.found_place}}</div>
           </div>
           <div class="detail-info-item">
-            <div class="detail-info-label">신고자</div>
+            <div class="detail-info-label">보관장소</div>
+            <div class="detail-info-value" id="storage_location_id">{{storage_location_name}}</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">습득자</div>
             <div class="detail-info-value" id="username">{{user.username}}</div>
           </div>
           <div class="detail-info-item">
@@ -419,6 +423,7 @@
       </form>
     </div>
   </div>
+
 </body>
 
 </html>
