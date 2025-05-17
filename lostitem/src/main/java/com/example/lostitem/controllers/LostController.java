@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/lost-items")
@@ -28,6 +29,9 @@ public class LostController {
     public String lostItems(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        List<Post> lostPosts = postService.getAllPosts();
+        model.addAttribute("lostPosts", lostPosts);
         return "lost_list";
     }
 
@@ -59,9 +63,10 @@ public class LostController {
         LostItem lostitem = new LostItem();
         lostitem.setLostPlace(lostPlace);
         lostitem.setLostDate(lostDate);
-        lostitem.setPost(post);
 
+        lostitem.setPost(post);
         post.setLostItem(lostitem);
+
         postService.savePost(post);
 
         return "redirect:/lost-items";
