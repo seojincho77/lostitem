@@ -185,10 +185,10 @@
         <div class="main-title">분실물 등록</div>
     </div>
     <div class="form-card">
-        <form>
+        <form method="post" th:action="@{/lost-items/new}">
             <div class="form-group">
                 <label for="item-name">분실물명</label>
-                <input type="text" id="item-name" name="item-name" placeholder="예) 지갑, 노트북" required>
+                <input type="text" id="item-name" name="title" placeholder="예) 지갑, 노트북" required>
             </div>
             <div class="form-group">
                 <label for="category">카테고리</label>
@@ -203,15 +203,15 @@
             </div>
             <div class="form-group">
                 <label for="lost-location">분실 장소</label>
-                <input type="text" id="lost-location" name="lost-location" placeholder="예) 도서관 2층, 학생식당" required>
+                <input type="text" id="lost-location" name="lostPlace" placeholder="예) 도서관 2층, 학생식당" required>
             </div>
             <div class="form-group">
                 <label for="lost-date">분실일</label>
-                <input type="date" id="lost-date" name="lost-date" required>
+                <input type="date" id="lost-date" name="lostDate" required>
             </div>
             <div class="form-group">
                 <label for="desc">특이사항/분실물 특징</label>
-                <textarea id="desc" name="desc" rows="3" placeholder="분실물의 특징 등"></textarea>
+                <textarea id="desc" name="description" rows="3" placeholder="분실물의 특징 등"></textarea>
             </div>
             <div class="form-btn-row">
                 <button type="submit" class="submit-btn">등록하기</button>
