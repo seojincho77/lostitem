@@ -366,10 +366,11 @@
         <div class="detail-img-area" id="image_url">
           <img src="{{post.image_url}}" alt="이미지">
         </div>
+        <!--습득물 상세 관리 테이블 필요-->
         <div class="detail-info-list">
           <div class="detail-info-item">
             <div class="detail-info-label">습득일</div>
-            <div class="detail-info-value" id="created_at">{{post.created_at}}</div>
+            <div class="detail-info-value" id="found_date">{{found_item.found_date}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
@@ -377,7 +378,7 @@
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">습득장소</div>
-            <div class="detail-info-value" id="found_place">{{post.found_place}}</div>
+            <div class="detail-info-value" id="found_place">{{found_item.found_place}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">보관장소</div>
