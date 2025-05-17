@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>습득물 상세정보</title>
+  <title>분실물 상세정보</title>
   <style>
     body {
       margin: 0;
@@ -50,9 +50,8 @@
     }
     .main-area {
       flex: 1;
-      background: #f6f8fd;
       min-width: 0;
-      padding: 0 0 2rem 0;
+      background: #f6f8fd;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,12 +158,12 @@
       line-height: 1.7;
       margin-bottom: 0.5rem;
     }
-    .list-btn-row {
+    .back-btn-row {
       display: flex;
       justify-content: flex-end;
       padding: 0 2.5rem 2.5rem 2.5rem;
     }
-    .list-btn {
+    .back-btn {
       padding: 0.85em 2.2em;
       font-size: 1.13rem;
       font-weight: 700;
@@ -175,7 +174,7 @@
       color: #232946;
       transition: background 0.16s, color 0.16s;
     }
-    .list-btn:hover {
+    .back-btn:hover {
       background: #232946;
       color: #fff;
     }
@@ -274,7 +273,7 @@
       .main-area { padding: 0 0 2rem 0; }
       .detail-card,
       .comment-card { max-width: 98vw; width: 98vw; }
-      .detail-header, .detail-main, .detail-desc-wrap, .list-btn-row,
+      .detail-header, .detail-main, .detail-desc-wrap, .back-btn-row,
       .comment-card { padding-left: 1rem; padding-right: 1rem; }
     }
     @media (max-width: 650px) {
@@ -297,60 +296,60 @@
 <div class="main-area">
   <div class="detail-card">
     <div class="detail-header">
-      <div class="detail-title">노트북</div>
-      <span class="badge">진행중</span>
+      <div class="detail-title" id="title">지갑</div>
+      <span class="badge" id="is_recovered">진행중</span>
     </div>
     <div class="detail-main">
-      <div class="detail-img-area">이미지</div>
+      <div class="detail-img-area" id="image_url">이미지</div>
       <div class="detail-info-list">
         <div class="detail-info-item">
-          <div class="detail-info-label">습득일</div>
-          <div class="detail-info-value">2025-04-05</div>
+          <div class="detail-info-label">분실일</div>
+          <div class="detail-info-value" id="lost_date">2025-05-05</div>
         </div>
         <div class="detail-info-item">
           <div class="detail-info-label">카테고리</div>
-          <div class="detail-info-value">전자기기</div>
+          <div class="detail-info-value" id="category_id">의류/잡화</div>
         </div>
         <div class="detail-info-item">
-          <div class="detail-info-label">습득장소</div>
-          <div class="detail-info-value">공학관 201호</div>
+          <div class="detail-info-label">분실장소</div>
+          <div class="detail-info-value" id="lost_place">학생회관 식당</div>
         </div>
         <div class="detail-info-item">
-          <div class="detail-info-label">보관장소</div>
-          <div class="detail-info-value">학생지원센터</div>
+          <div class="detail-info-label">신고자</div>
+          <div class="detail-info-value" id="username">김학생</div>
         </div>
         <div class="detail-info-item">
-          <div class="detail-info-label">습득자</div>
-          <div class="detail-info-value">홍길동</div>
+          <div class="detail-info-label">상태</div>
+          <div class="detail-info-value"><span class="badge" id="is_recovered">진행중</span></div>
         </div>
       </div>
     </div>
     <div class="detail-desc-wrap">
       <div class="detail-desc-title">상세 설명</div>
-      <div class="detail-desc">
-        공학관 201호 강의실 뒷자리에서 발견한 노트북입니다. 검은색 케이스가 씌워져 있고, 뒷면에 스티커가 붙어있습니다. 노트북 상표는 삼성입니다. 분실하신 분은 본인 확인을 위해 노트북 비밀번호 또는 기타 증명을 준비해주세요.
+      <div class="detail-desc" id="description">
+        학생회관 식당에서 분실한 빨간색 지갑입니다. 안에 신분증과 카드가 들어있고, 겉면에 작은 스티커가 붙어 있습니다. 발견하신 분은 연락 부탁드립니다.
       </div>
     </div>
-    <div class="list-btn-row">
-      <button class="list-btn" onclick="location.href='#'">습득물 목록으로</button>
+    <div class="back-btn-row">
+      <button class="back-btn" onclick="location.href='#'">분실물 목록으로</button>
     </div>
   </div>
   <div class="comment-card">
-    <div class="comment-title">댓글 (2)</div>
-    <ul class="comment-list">
+    <div class="comment-title">댓글</div>
+    <ul class="comment-list" id="comment_list">
       <li class="comment-item">
         <div>
-          <span class="comment-author">김학생</span>
-          <span class="comment-date">2025-04-05 14:30</span>
+          <span class="comment-author" id="comment_username_{{comment.id}}">홍길동</span>
+          <span class="comment-date" id="comment_created_at_{{comment.id}}">2025-05-05 17:10</span>
         </div>
-        <div class="comment-content">제 노트북인 것 같습니다. 노트북 뒷면에 작은 흠집이 있는데 확인 가능한가요?</div>
+        <div class="comment-content" id="comment_content_{{comment.id}}">혹시 안에 학생증이 들어있나요?</div>
       </li>
       <li class="comment-item">
         <div>
-          <span class="comment-author">홍길동</span>
-          <span class="comment-date">2025-04-05 15:10</span>
+          <span class="comment-author" id="comment_username_{{comment.id}}">김학생</span>
+          <span class="comment-date" id="comment_created_at_{{comment.id}}">2025-05-05 17:20</span>
         </div>
-        <div class="comment-content">네, 확인해보니 우측 하단에 작은 흠집이 있습니다. 연락 주시면 확인 후 찾아가실 수 있도록 안내해드리겠습니다.</div>
+        <div class="comment-content" id="comment_content_{{comment.id}}">네, 학생증과 신용카드가 들어 있습니다!</div>
       </li>
     </ul>
     <form class="comment-form-row">
