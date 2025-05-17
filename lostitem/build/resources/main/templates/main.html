@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      margin: 0;
+      margin: 0; 
       font-family: 'Noto Sans KR';
       background: #f6f8fd;
       color: #232946;
@@ -137,9 +137,33 @@
       background: #eebbc3;
       color: #232946;
     }
+    .user-info {
+      position: absolute;
+      top: 2.7rem;   
+      right: 3vw; 
+      background: none;
+      color: #393e6e;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin: 0;
+      padding: 0;
+      z-index: 10;
+      opacity: 0.85;
+    }
+    .user-info span {
+      color: #393e6e;
+      font-weight: 700;
+      font-size: 1em;
+    }
     @media (max-width: 900px) {
       .sidebar { display: none; }
       .main { padding: 1rem 1rem; }
+      .user-info {
+        top: 1.2rem;
+        right: 1rem;
+        font-size: 0.93rem;
+      }
     }
   </style>
 </head>
@@ -155,13 +179,11 @@
     <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
   </nav>
 </aside>
-<header class="header">
-  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
+<main class="main">
+    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
   <div class="user-info" th:if="${user != null}">
     <span th:text="'환영합니다, ' + ${user.username}"></span>
   </div>
-</header>
-<main class="main">
   <div class="headline">최근 등록된 분실/습득물</div>
   <section class="list-section">
     <table class="item-list" id="item-list">

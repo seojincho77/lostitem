@@ -57,6 +57,7 @@
       flex-direction: column;
       align-items: flex-start;
       box-sizing: border-box;
+      position: relative;
     }
     .main-header {
       width: 100%;
@@ -352,6 +353,26 @@
       border-color: #ececec;
       cursor: not-allowed;
     }
+    .user-info {
+      position: absolute;
+      top: 0.7rem;
+      left: 1.2rem;
+      background: none;
+      color: #393e6e;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin: 0;
+      padding: 0;
+      z-index: 30;
+      opacity: 0.85;
+      pointer-events: none; /* 버튼 겹침 방지 필요시 */
+    }
+    .user-info span {
+      color: #393e6e;
+      font-weight: 700;
+      font-size: 1em;
+    }
     @media (max-width: 1200px) {
       .main-header,
       .search-card,
@@ -363,6 +384,11 @@
       .main-header { max-width: 98vw; padding: 2.5rem 1rem 0 1rem; }
       .search-card, .list-card { width: 98vw; max-width: 98vw; padding: 1.5rem; }
       .search-filters { gap: 10px; }
+      .user-info {
+        top: 1.2rem;
+        right: 0.7rem;
+        font-size: 0.93rem;
+      }
     }
     @media (max-width: 768px) {
       .card-content {
@@ -405,18 +431,15 @@
     <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
   </nav>
 </aside>
-<header class="header">
-  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
-  <div class="user-info" th:if="${user != null}">
-    <span th:text="'환영합니다, ' + ${user.username}"></span>
-  </div>
-</header>
 <div class="main-area">
   <div class="main-header">
     <div class="main-title">습득물 목록</div>
     <button type="button" th:onclick="|location.href='@{/found-items/new}'|" class="register-btn" th:if="${user != null}">습득물 등록</button>
   </div>
-
+  <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
+  <div class="user-info" th:if="${user != null}">
+    <span th:text="'환영합니다, ' + ${user.username}"></span>
+  </div>
   <div class="search-card">
     <form class="search-bar" autocomplete="off">
       <input type="text" placeholder="습득물을 검색하세요..." />
