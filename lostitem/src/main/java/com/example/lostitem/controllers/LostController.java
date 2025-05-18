@@ -77,7 +77,7 @@ public class LostController {
         model.addAttribute("user", user);
 
         Optional<Post> post = postService.getPostById(id);
-        model.addAttribute("localPost", post);
+        model.addAttribute("lostPost", post.orElse(null));
 
         return "lost_detail";
     }

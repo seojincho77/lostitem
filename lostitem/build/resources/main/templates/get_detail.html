@@ -350,43 +350,44 @@
   <aside class="sidebar">
     <div class="logo">Lost&Found</div>
     <nav>
-      <a href="main.html">홈</a>
-      <a href="lost_list.html">분실물 목록</a>
-      <a href="get_list.html">습득물 목록</a>
-      <a href="login.html">로그인</a>
-      <a href="signup.html">회원가입</a>
+      <a th:href="@{/}">홈</a>
+      <a th:href="@{/lost-items}">분실물 목록</a>
+      <a th:href="@{/found-items}">습득물 목록</a>
+      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
     </nav>
   </aside>
   <div class="main-area">
     <div class="detail-card">
       <div class="detail-header">
-        <div class="detail-title" id="title">{{post.title}}</div>
+        <div class="detail-title" id="title" th:text="${foundPost.title}">{{post.title}}</div>
       </div>
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
-          <img src="{{post.image_url}}" alt="이미지">
+          <img th:src="@{${foundPost.imageUrl}}" alt="이미지">
         </div>
         <!--습득물 상세 관리 테이블 필요-->
         <div class="detail-info-list">
           <div class="detail-info-item">
             <div class="detail-info-label">습득일</div>
-            <div class="detail-info-value" id="found_date">{{found_item.found_date}}</div>
+            <div class="detail-info-value" id="found_date"th:text="${foundPost.lostItem.lostDate}">{{found_item.found_date}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
-            <div class="detail-info-value" id="category_id">{{category_name}}</div>
+            <div class="detail-info-value" id="category_id" th:text="${foundPost.lostItem.category}">{{category_name}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">습득장소</div>
-            <div class="detail-info-value" id="found_place">{{found_item.found_place}}</div>
+            <div class="detail-info-value" id="found_place" th:text="${foundPost.foundPlace}">{{found_item.found_place}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">보관장소</div>
-            <div class="detail-info-value" id="storage_location_id">{{post.storage_location_name}}</div>
+            <div class="detail-info-value" id="storage_location_id" th:text="${foundPost.storageLocation}">{{post.storage_location_name}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">습득자</div>
-            <div class="detail-info-value" id="username">{{user.username}}</div>
+            <div class="detail-info-value" id="username" th:text="${foundPost.user.username}">{{user.username}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
@@ -398,7 +399,7 @@
       </div>
       <div class="detail-desc-wrap">
         <div class="detail-desc-title">상세 설명</div>
-        <div class="detail-desc" id="description">{{post.description}}</div>
+        <div class="detail-desc" id="description" th:text="${foundPost.description}">{{post.description}}</div>
       </div>
       <div class="back-btn-row">
         <button class="back-btn" onclick="history.back()">목록으로</button>

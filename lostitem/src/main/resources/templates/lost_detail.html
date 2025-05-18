@@ -360,28 +360,28 @@
   <div class="main-area">
     <div class="detail-card">
       <div class="detail-header">
-        <div class="detail-title" id="title">{{post.title}}</div>
+        <div class="detail-title" id="title" th:text="${lostPost.title}">{{post.title}}</div>
       </div>
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
-          <img src="{{post.image_url}}" alt="이미지">
+          <img th:src="@{${lostPost.imageUrl}}" alt="이미지">
         </div>
         <div class="detail-info-list">
           <div class="detail-info-item">
             <div class="detail-info-label">분실일</div>
-            <div class="detail-info-value" id="lost_date">{{lost_item.lost_date}}</div>
+            <div class="detail-info-value" id="lost_date" th:text="${lostPost.lostItem.lostDate}">{{lost_item.lost_date}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
-            <div class="detail-info-value" id="category_id">{{category_name}}</div>
+            <div class="detail-info-value" id="category_id" th:text="${lostPost.lostItem.category}">{{category_name}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">분실장소</div>
-            <div class="detail-info-value" id="lost_place">{{lost_item.lost_place}}</div>
+            <div class="detail-info-value" id="lost_place" th:text="${lostPost.lostItem.lostPlace}">{{lost_item.lost_place}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">신고자</div>
-            <div class="detail-info-value" id="username">{{user.username}}</div>
+            <div class="detail-info-value" id="username" th:text="${lostPost.user.username}">{{user.username}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
@@ -393,7 +393,7 @@
       </div>
       <div class="detail-desc-wrap">
         <div class="detail-desc-title">상세 설명</div>
-        <div class="detail-desc" id="description">{{post.description}}</div>
+        <div class="detail-desc" id="description" th:text="${lostPost.description}">{{post.description}}</div>
       </div>
       <div class="back-btn-row">
         <button class="back-btn" onclick="history.back()">목록으로</button>
