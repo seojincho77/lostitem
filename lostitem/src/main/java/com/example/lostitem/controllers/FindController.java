@@ -1,15 +1,26 @@
 package com.example.lostitem.controllers;
 
-import com.example.lostitem.models.Users;
+import com.example.lostitem.models.*;
+import com.example.lostitem.services.LostItemService;
+import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/found-items")
 public class FindController {
+    private final PostService postService;
+    private final LostItemService lostItemService;
+
+    public FindController(PostService postService, LostItemService lostItemService) {
+        this.postService = postService;
+        this.lostItemService = lostItemService;
+    }
+
     @GetMapping
     public String foundItems(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
@@ -22,5 +33,38 @@ public class FindController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
         return "get_registeration";
+    }
+
+    @PostMapping("/new")
+    public String CreateFoundItem(
+            @RequestParam String title,
+            @RequestParam CategoryType category,
+            @RequestParam String foundPlace,
+            @RequestParam StorageLocationType storageLocation,
+            @RequestParam LocalDate foundDate,
+            @RequestParam String description,
+            HttpSession session,
+            Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        Post post = new Post();
+        post.setTitle(title);
+        post.setFoundPlace(foundPlace);
+        post.setStorageLocation(storageLocation);
+        post.setDescription(description);
+        post.setUser(user);
+        post.setPostType(PostType.found);
+
+        LostItem lostitem = new LostItem();
+        lostitem.setCategory(category);
+        lostitem.setLostDate(foundDate);
+
+        lostitem.setPost(post);
+        post.setLostItem(lostitem);
+
+        postService.savePost(post);
+
+        return "redirect:/found-items";
     }
 }

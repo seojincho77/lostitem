@@ -31,9 +31,9 @@ public class Post {
     @Column(name = "post_type")
     private PostType postType; // Enum 타입 정의 필요
 
-    @ManyToOne
-    @JoinColumn(name = "storage_location_id")
-    private Locations storageLocation;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "storage_location_id")
+    private StorageLocationType storageLocation;
 
     @Column(name = "found_place")
     private String foundPlace;

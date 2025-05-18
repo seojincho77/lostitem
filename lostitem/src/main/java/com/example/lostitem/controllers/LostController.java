@@ -57,7 +57,6 @@ public class LostController {
         post.setUser(user);
         post.setPostType(PostType.lost);
 
-
         LostItem lostitem = new LostItem();
         lostitem.setLostPlace(lostPlace);
         lostitem.setLostDate(lostDate);

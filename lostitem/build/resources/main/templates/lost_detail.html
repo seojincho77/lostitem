@@ -360,7 +360,6 @@
     <div class="detail-card">
       <div class="detail-header">
         <div class="detail-title" id="title">{{post.title}}</div>
-        <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
       </div>
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
@@ -386,7 +385,7 @@
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
             <div class="detail-info-value">
-              <span class="badge" id="is_recovered_detail">{{post.is_recovered ? '진행중' : '완료'}}</span>
+              <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
             </div>
           </div>
         </div>
@@ -400,7 +399,7 @@
       </div>
     </div>
     <div class="comment-card">
-      <div class="comment-title">댓글 ({{comments.length}})</div>
+      <div class="comment-title">댓글</div>
       <ul class="comment-list" id="comment_list">
         {% for comment in comments %}
         <li class="comment-item">
