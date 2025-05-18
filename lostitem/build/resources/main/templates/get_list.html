@@ -556,7 +556,9 @@
 
         <div class="list-card">
             <div class="lost-list">
-                <div class="lost-card" th:each="post : ${foundPosts}">
+                <div class="lost-card" th:each="post : ${foundPosts}"
+                     th:onclick="|window.location.href='@{/found-items/{id}(id=${post.id})}'|"
+                     style="cursor: pointer;">
                     <div class="card-img-area">
                         <div class="card-img-area">사진 없음</div>
                     </div>

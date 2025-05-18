@@ -200,7 +200,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="post : ${posts}">
+          <tr th:each="post : ${posts}"
+              th:onclick="|window.location.href='@{${post.postType == found ? '/found-items/' + post.id : '/lost-items/' + post.id}}'|"
+              style="cursor: pointer;">
             <td>
               <div class="item-img">
                 <img th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" alt="이미지" />
