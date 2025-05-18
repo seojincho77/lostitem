@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/found-items")
@@ -25,6 +26,9 @@ public class FindController {
     public String foundItems(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        List<Post> foundPosts = postService.getFoundPosts();
+        model.addAttribute("foundPosts", foundPosts);
         return "get_list";
     }
 

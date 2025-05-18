@@ -556,37 +556,40 @@
 
         <div class="list-card">
             <div class="lost-list">
-                <div class="lost-card" id="card_{{posts.id}}">
-                    <div class="card-img-area" id="image_url_{{posts.id}}">
-                        <img src="{{posts.image_url}}" alt="이미지">
+                <div class="lost-card" th:each="post : ${foundPosts}">
+                    <div class="card-img-area">
+                        <div class="card-img-area">사진 없음</div>
                     </div>
                     <div class="card-content">
                         <div class="card-main-info">
-                            <div class="card-title" id="title_{{posts.id}}">{{posts.title}}</div>
-                            <div class="card-date" id="created_at_{{posts.id}}">
-                                <span class="card-label">습득일:</span> {{posts.created_at}}
+                            <div class="card-title" th:text="${post.title}">제목</div>
+                            <div class="card-date">
+                                <span class="card-label">습득일:</span>
+                                <span th:text="${post.lostItem.lostDate}"></span>
                             </div>
-                            <div class="card-location" id="found_place_{{posts.id}}">
-                                <span class="card-label">습득장소:</span> {{posts.found_place}}
+                            <div class="card-location">
+                                <span class="card-label">습득장소:</span>
+                                <span th:text="${post.foundPlace}"></span>
                             </div>
-                            <span
-                                class="badge status-badge {{posts.is_recovered ? 'status-returned' : 'status-instorage'}}"
-                                id="is_recovered_{{posts.id}}">
-                                {{posts.is_recovered ? '반환완료' : '보관중'}}
-                            </span>
                         </div>
                         <div class="card-sub-info">
-                            <div class="card-category" id="category_id_{{posts.id}}">
-                                <span class="card-label">카테고리:</span> {{posts.category_name}}
+                            <div class="card-category">
+                                <span class="card-label">카테고리:</span>
+                                <span class="card-label" th:text="${post.lostItem.category}"></span>
                             </div>
-                            <div class="card-keep-location" id="storage_location_id_{{posts.id}}">
-                                <span class="card-label">보관장소:</span> {{posts.storage_location_name}}
+                            <div class="card-keep-location">
+                                <span class="card-label">보관장소:</span>
+                                <span class="card-label" th:text="${post.storageLocation}"></span>
                             </div>
+                            <!--<div class="badge" th:classappend="${post.status} == '보관중' ? ' keep' : ' returned'"
+                                 th:text="${post.status}"></div>-->
+                            <div class="badge keep">습득</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+        </div>
             <div class="pagination-wrap">
                 <ul class="pagination">
                     <li><button title="이전 페이지" disabled>&lt;</button></li>
@@ -596,7 +599,7 @@
                     <li><button title="다음 페이지">&gt;</button></li>
                 </ul>
             </div>
-        </div>
+
     </div>
 </body>
 

@@ -27,7 +27,7 @@ public class LostController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        List<Post> lostPosts = postService.getAllPosts();
+        List<Post> lostPosts = postService.getLostPosts();
         model.addAttribute("lostPosts", lostPosts);
         return "lost_list";
     }

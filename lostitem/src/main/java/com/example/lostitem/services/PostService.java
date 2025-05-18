@@ -1,6 +1,7 @@
 package com.example.lostitem.services;
 
 import com.example.lostitem.models.Post;
+import com.example.lostitem.models.PostType;
 import com.example.lostitem.models.Users;
 import com.example.lostitem.repositories.PostRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,14 @@ public class PostService {
 
     public List<Post> getAllPosts() {
         return postRepository.findAll();
+    }
+
+    public List<Post> getLostPosts() {
+        return postRepository.findByPostType(PostType.lost);
+    }
+
+    public List<Post> getFoundPosts() {
+        return postRepository.findByPostType(PostType.found);
     }
 
     public Optional<Post> getPostById(Integer id) {

@@ -469,35 +469,37 @@
       </select>
     </div>
   </div>
-  <div class="lost-list">
-    <div class="lost-card" th:each="post : ${lostPosts}">
-      <div class="card-img-area">사진 없음</div>
-      <div class="card-content">
-        <div class="card-main-info">
-          <div class="card-title" th:text="${post.title}">분실물 제목</div>
-          <div class="card-date">
-            <span class="card-label">날짜:</span>
-            <span th:text="${post.lostItem.lostDate}">2025-05-16</span>
+  <div class="list-card">
+    <div class="lost-list">
+      <div class="lost-card" th:each="post : ${lostPosts}">
+        <div class="card-img-area">사진 없음</div>
+        <div class="card-content">
+          <div class="card-main-info">
+            <div class="card-title" th:text="${post.title}">분실물 제목</div>
+            <div class="card-date">
+              <span class="card-label">날짜:</span>
+              <span th:text="${post.lostItem.lostDate}">2025-05-16</span>
+            </div>
+            <div class="card-location">
+              <span class="card-label">장소:</span>
+              <span th:text="${post.lostItem.lostPlace}">서울역</span>
+            </div>
           </div>
-          <div class="card-location">
-            <span class="card-label">장소:</span>
-            <span th:text="${post.lostItem.lostPlace}">서울역</span>
+          <div class="card-sub-info">
+            <div class="card-category">
+              <span class="card-label">등록자:</span>
+              <span th:text="${post.user.username}">홍길동</span>
+            </div>
+            <!--<div class="card-keep-location">
+              <span class="card-label">설명:</span>
+              <span th:text="${post.description}">검정색 지갑입니다.</span>
+            </div>-->
+            <div class="card-category">
+              <span class="card-label">카테고리:</span>
+              <span th:text="${post.lostItem.category}">검정색 지갑입니다.</span>
+            </div>
+            <div class="badge keep">분실</div>
           </div>
-        </div>
-        <div class="card-sub-info">
-          <div class="card-category">
-            <span class="card-label">등록자:</span>
-            <span th:text="${post.user.username}">홍길동</span>
-          </div>
-          <!--<div class="card-keep-location">
-            <span class="card-label">설명:</span>
-            <span th:text="${post.description}">검정색 지갑입니다.</span>
-          </div>-->
-          <div class="card-category">
-            <span class="card-label">카테고리:</span>
-            <span th:text="${post.lostItem.category}">검정색 지갑입니다.</span>
-          </div>
-          <div class="badge keep">분실</div>
         </div>
       </div>
     </div>
