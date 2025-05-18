@@ -445,23 +445,23 @@
       <input type="text" placeholder="분실물을 검색하세요..." />
       <button type="submit">검색</button>
       <div class="search-filters">
-        <select id="date-filter">
-          <option>날짜별</option>
-          <option>오늘</option>
-          <option>이번주</option>
-          <option>이번달</option>
-          <option>올해</option>
+        <select id="date-filter" name="date">
+          <option value="">날짜별</option>
+          <option value="DAY">오늘</option>
+          <option value="WEEK">이번주</option>
+          <option value="MONTH">이번달</option>
+          <option value="YEAR">올해</option>
         </select>
-        <select>
-          <option>카테고리</option>
-          <option>전자기기</option>
-          <option>의류/잡화</option>
-          <option>신분증/카드</option>
-          <option>서류/책</option>
-          <option>기타</option>
+        <select name="category">
+          <option value="">카테고리 선택</option>
+          <option value="ELECTRONICS">전자기기</option>
+          <option value="CLOTHING">의류/잡화</option>
+          <option value="CARD">신분증/카드</option>
+          <option value="BOOK">서류/책</option>
+          <option value="ETC">기타</option>
         </select>
-        <input type="text" placeholder="분실장소 직접입력" />
-        <select>
+        <input type="text" placeholder="분실물,분실장소 직접입력" name="keyword"/>
+        <select name="status">
           <option>상태</option>
           <option>진행중</option>
           <option>완료</option>
