@@ -350,11 +350,12 @@
   <aside class="sidebar">
     <div class="logo">Lost&Found</div>
     <nav>
-      <a href="main.html">홈</a>
-      <a href="lost_list.html">분실물 목록</a>
-      <a href="get_list.html">습득물 목록</a>
-      <a href="login.html">로그인</a>
-      <a href="signup.html">회원가입</a>
+      <a th:href="@{/}">홈</a>
+      <a th:href="@{/lost-items}">분실물 목록</a>
+      <a th:href="@{/found-items}">습득물 목록</a>
+      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
     </nav>
   </aside>
   <div class="main-area">

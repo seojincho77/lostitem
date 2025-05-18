@@ -79,7 +79,7 @@ public class FindController {
         model.addAttribute("user", user);
 
         Optional<Post> post = postService.getPostById(id);
-        model.addAttribute("post", post);
+        model.addAttribute("foundPost", post);
 
         return "get_detail";
     }
