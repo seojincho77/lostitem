@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       font-family: 'Noto Sans KR';
       background: #f6f8fd;
       color: #232946;
       display: flex;
       min-height: 100vh;
     }
+
     .sidebar {
       width: 220px;
       background: #232946;
@@ -22,6 +24,7 @@
       padding: 2.5rem 0 1rem 0;
       min-height: 100vh;
     }
+
     .sidebar .logo {
       font-size: 1.6rem;
       font-weight: 800;
@@ -29,9 +32,11 @@
       color: #eebbc3;
       letter-spacing: 1px;
     }
+
     .sidebar nav {
       width: 100%;
     }
+
     .sidebar nav a {
       display: block;
       color: #eebbc3;
@@ -42,11 +47,13 @@
       border-radius: 8px 0 0 8px;
       transition: background 0.13s;
     }
+
     .sidebar nav a.active,
     .sidebar nav a:hover {
       background: #393e6e;
       color: #fff;
     }
+
     .main {
       flex: 1;
       padding: 2.5rem 3vw 2rem 3vw;
@@ -54,40 +61,49 @@
       flex-direction: column;
       min-width: 0;
     }
+
     .headline {
       margin-bottom: 2rem;
       font-size: 1.5rem;
       font-weight: 800;
       color: #232946;
     }
+
     .list-section {
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.20);
       padding: 0;
       overflow: hidden;
       margin-bottom: 2rem;
     }
+
     .item-list {
       width: 100%;
       border-collapse: collapse;
       font-size: 1rem;
     }
-    .item-list th, .item-list td {
+
+    .item-list th,
+    .item-list td {
       padding: 1.1rem 0.7rem;
       text-align: left;
     }
+
     .item-list th {
       background: #f4f6fa;
       color: #393e6e;
       font-size: 1.1rem;
       font-weight: 800;
     }
+
     .item-list tr {
       border-bottom: 1.5px solid #ececec;
     }
+
     .item-list tr:hover {
       background: #f8f0f5;
     }
+
     .item-img {
       width: 50px;
       height: 50px;
@@ -97,9 +113,10 @@
       justify-content: center;
       font-size: 1rem;
       color: #232946;
-      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
       border-radius: 10px;
     }
+
     .item-type {
       display: inline-block;
       font-size: 1rem;
@@ -110,19 +127,23 @@
       color: #232946;
       letter-spacing: 0.5px;
     }
+
     .item-type.lost {
       background: #b8c1ec;
       color: #232946;
     }
+
     .item-name {
       font-weight: 700;
       font-size: 1rem;
       color: #232946;
     }
+
     .item-detail {
       color: #232946;
       font-size: 1rem;
     }
+
     .status-badge {
       display: inline-block;
       padding: 0.5em 1em;
@@ -133,102 +154,75 @@
       color: #232946;
       letter-spacing: 0.5px;
     }
+
     .status-returned {
       background: #eebbc3;
       color: #232946;
     }
-    .user-info {
-      position: absolute;
-      top: 2.7rem;   
-      right: 3vw; 
-      background: none;
-      color: #393e6e;
-      font-size: 0.98rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      margin: 0;
-      padding: 0;
-      z-index: 10;
-      opacity: 0.85;
-    }
-    .user-info span {
-      color: #393e6e;
-      font-weight: 700;
-      font-size: 1em;
-    }
+
     @media (max-width: 900px) {
-      .sidebar { display: none; }
-      .main { padding: 1rem 1rem; }
-      .user-info {
-        top: 1.2rem;
-        right: 1rem;
-        font-size: 0.93rem;
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem 1rem;
       }
     }
   </style>
 </head>
+
 <body>
-<aside class="sidebar">
-  <div class="logo">Lost&Found</div>
-  <nav>
-    <a th:href="@{/}">홈</a>
-    <a th:href="@{/lost-items}">분실물 목록</a>
-    <a th:href="@{/found-items}">습득물 목록</a>
-    <a th:href="@{/login}" th:if="${user == null}">로그인</a>
-    <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
-    <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
-  </nav>
-</aside>
-<main class="main">
-    <!-- 로그인한 경우 사용자 이름과 로그아웃 버튼 표시 -->
-  <div class="user-info" th:if="${user != null}">
-    <span th:text="'환영합니다, ' + ${user.username}"></span>
-  </div>
-  <div class="headline">최근 등록된 분실/습득물</div>
-  <section class="list-section">
-    <table class="item-list" id="item-list">
-      <thead>
-      <tr>
-        <th>이미지</th>
-        <th>구분</th>
-        <th>물품명</th>
-        <th>카테고리</th>
-        <th>장소</th>
-        <th>등록일</th>
-        <th>상태</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type found">습득물</span></td>
-        <td><span class="item-name">노트북</span></td>
-        <td><span class="item-detail">전자기기</span></td>
-        <td>공학관 201호</td>
-        <td>2025-04-05</td>
-        <td><span class="status-badge">보관중</span></td>
-      </tr>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type found">습득물</span></td>
-        <td><span class="item-name">지갑</span></td>
-        <td><span class="item-detail">의류/잡화</span></td>
-        <td>도서관 2층</td>
-        <td>2025-04-04</td>
-        <td><span class="status-badge">보관중</span></td>
-      </tr>
-      <tr>
-        <td><div class="item-img">이미지</div></td>
-        <td><span class="item-type lost">분실물</span></td>
-        <td><span class="item-name">학생증</span></td>
-        <td><span class="item-detail">신분증/카드</span></td>
-        <td>학생회관 식당</td>
-        <td>2025-04-03</td>
-        <td><span class="status-badge status-returned">완료</span></td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
-</main>
+  <aside class="sidebar">
+    <div class="logo">Lost&Found</div>
+    <nav>
+      <a th:href="@{/}">홈</a>
+      <a th:href="@{/lost-items}">분실물 목록</a>
+      <a th:href="@{/found-items}">습득물 목록</a>
+      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="headline">최근 등록된 분실/습득물</div>
+    <section class="list-section">
+      <table class="item-list" id="item-list">
+        <thead>
+          <tr>
+            <th>이미지</th>
+            <th>구분</th>
+            <th>물품명</th>
+            <th>카테고리</th>
+            <th>장소</th>
+            <th>등록일</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="post : ${posts}">
+            <td>
+              <div class="item-img">
+                <img th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" alt="이미지" />
+                <span th:if="${post.imageUrl == null}">사진 없음</span>
+              </div>
+            </td>
+            <td>
+              <span class="item-type" th:text="${post.postType == 'found' ? '습득물' : '분실물'}"></span>
+            </td>
+            <td><span class="item-name" th:text="${post.title}"></span></td>
+            <td><span class="item-detail" th:text="${post.category.name}"></span></td>
+            <td th:text="${post.postType == 'found' ? post.foundPlace : post.lostItem.lostPlace}"></td>
+            <td th:text="${post.createdAt}"></td>
+            <td>
+              <span th:class="${post.isRecovered} ? 'status-returned' : 'status-badge'"
+                th:text="${post.isRecovered} ? '완료' : '진행중'"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 </body>
+
 </html>
