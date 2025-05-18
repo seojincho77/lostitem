@@ -208,12 +208,12 @@
               </div>
             </td>
             <td>
-              <span class="item-type" th:text="${post.postType == 'found' ? '습득물' : '분실물'}"></span>
+              <span class="item-type" th:text="${post.postType == found ? '습득물' : '분실물'}"></span>
             </td>
             <td><span class="item-name" th:text="${post.title}"></span></td>
-            <td><span class="item-detail" th:text="${post.category.name}"></span></td>
-            <td th:text="${post.postType == 'found' ? post.foundPlace : post.lostItem.lostPlace}"></td>
-            <td th:text="${post.createdAt}"></td>
+            <td><span class="item-detail" th:text="${post.lostItem.category}"></span></td>
+            <td th:text="${post.postType == found ? post.foundPlace : post.lostItem.lostPlace}"></td>
+            <td th:text="${#temporals.format(post.createdAt, 'yyyy년 MM월 dd일 (E) a hh시 mm분')}"></td>
             <td>
               <span th:class="${post.isRecovered} ? 'status-returned' : 'status-badge'"
                 th:text="${post.isRecovered} ? '완료' : '진행중'"></span>
