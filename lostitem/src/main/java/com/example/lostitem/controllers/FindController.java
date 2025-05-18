@@ -83,4 +83,16 @@ public class FindController {
 
         return "get_detail";
     }
+
+    @GetMapping
+    public String ShowFoundItem(
+            @RequestParam(required = false) DateType date,
+            @RequestParam(required = false) CategoryType category,
+            HttpSession session,
+            Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        return "get_list";
+    }
 }
