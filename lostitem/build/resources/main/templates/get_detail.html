@@ -307,6 +307,23 @@
       background: #1976c9;
     }
 
+    .status-toggle-btn {
+      margin-left: 8px;
+      padding: 0.3em 1.2em;
+      background: #004ba1;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .status-toggle-btn:hover {
+      background: #00336a;
+    }
+
     @media (max-width: 900px) {
       .sidebar {
         display: none;
@@ -393,6 +410,7 @@
             <div class="detail-info-label">상태</div>
             <div class="detail-info-value">
               <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
+              <button type="button" class="status-toggle-btn">상태 변경</button>
             </div>
           </div>
         </div>
