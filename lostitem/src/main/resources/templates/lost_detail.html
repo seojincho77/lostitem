@@ -306,6 +306,23 @@
       background: #1976c9;
     }
 
+    .status-toggle-btn {
+      margin-left: 8px;
+      padding: 0.3em 1.2em;
+      background: #004ba1;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .status-toggle-btn:hover {
+      background: #00336a;
+    }
+
     @media (max-width: 900px) {
       .sidebar {
         display: none;
@@ -349,51 +366,51 @@
   <aside class="sidebar">
     <div class="logo">Lost&Found</div>
     <nav>
-      <a th:href="@{/}">홈</a>
-      <a th:href="@{/lost-items}">분실물 목록</a>
-      <a th:href="@{/found-items}">습득물 목록</a>
-      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
-      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
-      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
+      <a href="main.html">홈</a>
+      <a href="lost_list.html">분실물 목록</a>
+      <a href="get_list.html">습득물 목록</a>
+      <a href="login.html">로그인</a>
+      <a href="signup.html">회원가입</a>
     </nav>
   </aside>
   <div class="main-area">
     <div class="detail-card">
       <div class="detail-header">
-        <div class="detail-title" id="title" th:text="${lostPost.title}">{{post.title}}</div>
+        <div class="detail-title" id="title">{{post.title}}</div>
       </div>
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
-          <img th:src="@{${lostPost.imageUrl}}" alt="이미지">
+          <img src="{{post.image_url}}" alt="이미지">
         </div>
         <div class="detail-info-list">
           <div class="detail-info-item">
             <div class="detail-info-label">분실일</div>
-            <div class="detail-info-value" id="lost_date" th:text="${lostPost.lostItem.lostDate}">{{lost_item.lost_date}}</div>
+            <div class="detail-info-value" id="lost_date">{{lost_item.lost_date}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
-            <div class="detail-info-value" id="category_id" th:text="${lostPost.lostItem.category}">{{category_name}}</div>
+            <div class="detail-info-value" id="category_id">{{category_name}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">분실장소</div>
-            <div class="detail-info-value" id="lost_place" th:text="${lostPost.lostItem.lostPlace}">{{lost_item.lost_place}}</div>
+            <div class="detail-info-value" id="lost_place">{{lost_item.lost_place}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">신고자</div>
-            <div class="detail-info-value" id="username" th:text="${lostPost.user.username}">{{user.username}}</div>
+            <div class="detail-info-value" id="username">{{user.username}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
             <div class="detail-info-value">
               <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
+              <button type="button" class="status-toggle-btn">상태 변경</button>
             </div>
           </div>
         </div>
       </div>
       <div class="detail-desc-wrap">
         <div class="detail-desc-title">상세 설명</div>
-        <div class="detail-desc" id="description" th:text="${lostPost.description}">{{post.description}}</div>
+        <div class="detail-desc" id="description">{{post.description}}</div>
       </div>
       <div class="back-btn-row">
         <button class="back-btn" onclick="history.back()">목록으로</button>
@@ -420,4 +437,5 @@
   </div>
 
 </body>
+
 </html>
