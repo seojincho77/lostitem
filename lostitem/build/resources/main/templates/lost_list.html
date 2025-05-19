@@ -475,7 +475,7 @@
            th:onclick="|window.location.href='@{/lost-items/{id}(id=${post.id})}'|"
            style="cursor: pointer;">
         <div class="card-img-area">
-          <img th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" alt="이미지" />
+          <img class="card-img-area" th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" alt="이미지" />
           <span th:if="${post.imageUrl == null}">사진 없음</span>
         </div>
         <div class="card-content">
