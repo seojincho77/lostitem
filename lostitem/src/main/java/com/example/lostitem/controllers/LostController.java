@@ -59,20 +59,29 @@ public class LostController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        String uploadDir = "uploads/images/";
-        String originalFilename = imageFile.getOriginalFilename();
         String imagePath = null;
 
         if (imageFile != null && !imageFile.isEmpty()) {
-            // 파일명 중복 방지를 위해 UUID 사용
+            String originalFilename = imageFile.getOriginalFilename();
             String savedFilename = UUID.randomUUID() + "_" + originalFilename;
-            Path savePath = Paths.get(uploadDir + savedFilename);
 
-            // 디렉토리 없으면 생성
-            Files.createDirectories(savePath.getParent());
+            System.out.println("originalFilename: " + imageFile.getOriginalFilename());
+            System.out.println("UUID: " + UUID.randomUUID());
+
+            // 절대 경로로 저장
+            String uploadDir = System.getProperty("user.dir") + "/images/";
+            Path uploadPath = Paths.get(uploadDir);
+
+// 디렉토리가 없으면 생성
+            Files.createDirectories(uploadPath);
+
+// 파일 저장
+            Path savePath = uploadPath.resolve(savedFilename);
             imageFile.transferTo(savePath.toFile());
 
-            imagePath = "/uploads/images/" + savedFilename; // 이 경로는 나중에 static 경로와 연결됨
+            System.out.println("Save path: " + savePath.toString());
+            // 웹에서 접근 가능한 경로로 설정
+            imagePath = "/images/" + savedFilename;
         }
 
         Post post = new Post();
