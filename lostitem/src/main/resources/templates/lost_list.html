@@ -503,7 +503,9 @@
               <span class="card-label">카테고리:</span>
               <span th:text="${post.lostItem.category}">검정색 지갑입니다.</span>
             </div>
-            <div class="badge keep">진행중</div>
+            <div class="badge keep">
+              <span th:text="${post.isRecovered} ? '완료' : '진행중'"></span>
+            </div>
           </div>
         </div>
       </div>

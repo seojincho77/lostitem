@@ -5,6 +5,7 @@ import com.example.lostitem.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -87,6 +88,19 @@ public class PostService {
 
                 })
                 .collect(Collectors.toList());
+    }
+
+    public void toggleIsRecovered(Integer postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        Boolean current = post.getIsRecovered();
+        post.setIsRecovered(!current); // true면 false, false면 true
+
+        // 업데이트 타임도 바꾸고 싶다면 아래 추가
+//        post.setRecoveredAt(!current ? LocalDateTime.now() : null);
+
+        postRepository.save(post); // 변경 내용 저장
     }
 
     public Post savePost(Post post) {

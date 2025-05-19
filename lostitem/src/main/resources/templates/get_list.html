@@ -588,7 +588,9 @@
                             </div>
                             <!--<div class="badge" th:classappend="${post.status} == '보관중' ? ' keep' : ' returned'"
                                  th:text="${post.status}"></div>-->
-                            <div class="badge keep">진행중</div>
+                            <div class="badge keep">
+                                <span th:text="${post.isRecovered} ? '완료' : '진행중'"></span>
+                            </div>
                         </div>
                     </div>
                 </div>

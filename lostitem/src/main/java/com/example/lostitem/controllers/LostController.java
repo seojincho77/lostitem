@@ -4,6 +4,7 @@ import com.example.lostitem.models.*;
 import com.example.lostitem.services.LostItemService;
 import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -133,5 +134,14 @@ public class LostController {
         model.addAttribute("selectedCategory", category.name());
 
         return "lost_list";
+    }
+
+    @PostMapping("/{id}/status")
+    public String updateLostStatus(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        postService.toggleIsRecovered(id);
+        return "redirect:/lost-items/" + id;
     }
 }

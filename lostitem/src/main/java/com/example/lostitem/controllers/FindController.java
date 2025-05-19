@@ -136,4 +136,13 @@ public class FindController {
 
         return "get_list";
     }
+
+    @PostMapping("/{id}/status")
+    public String updateFoundStatus(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        postService.toggleIsRecovered(id);
+        return "redirect:/found-items/" + id;
+    }
 }

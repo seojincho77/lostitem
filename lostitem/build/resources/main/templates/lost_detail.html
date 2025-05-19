@@ -403,8 +403,11 @@
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
             <div class="detail-info-value">
-              <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
-              <button type="button" class="status-toggle-btn">상태 변경</button>
+              <span class="badge" id="is_recovered" th:text="${lostPost.isRecovered?'완료':'진행중'}"></span>
+              <form th:action="@{/lost-items/{id}/status(id=${lostPost.id})}" method="post"
+                    th:if="${user != null and user.id == lostPost.user.id}">
+                <button type="submit" class="status-toggle-btn">상태 변경</button>
+              </form>
             </div>
           </div>
         </div>
