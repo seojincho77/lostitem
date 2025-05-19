@@ -23,7 +23,7 @@ public class LostController {
         this.lostItemService = lostItemService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String lostItems(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
@@ -31,7 +31,7 @@ public class LostController {
         List<Post> lostPosts = postService.getLostPosts();
         model.addAttribute("lostPosts", lostPosts);
         return "lost_list";
-    }
+    }*/
 
     @GetMapping("/new")
     public String CreateLostItem(HttpSession session, Model model) {
@@ -84,12 +84,20 @@ public class LostController {
 
     @GetMapping
     public String showLostItems(
-            @RequestParam(required = false) DateType date,
-            @RequestParam(required = false) CategoryType category,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "NONE") DateType date,
+            @RequestParam(defaultValue = "NONE") CategoryType category,
+            @RequestParam(required = false) String place,
             HttpSession session,
             Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.lost);
+
+        model.addAttribute("lostPosts", filteredPosts);
+        model.addAttribute("selectedDate", date.name());
+        model.addAttribute("selectedCategory", category.name());
 
         return "lost_list";
     }

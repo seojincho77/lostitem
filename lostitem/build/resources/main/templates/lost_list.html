@@ -441,33 +441,33 @@
     <span th:text="'환영합니다, ' + ${user.username}"></span>
   </div>
   <div class="search-card">
-    <form class="search-bar" autocomplete="off">
-      <input type="text" placeholder="분실물을 검색하세요..." />
+    <form class="search-bar" autocomplete="off" method="get" th:action="@{/lost-items}">
+      <input type="text" placeholder="분실물을 검색하세요..." name="keyword"/>
       <button type="submit">검색</button>
+      <div class="search-filters">
+        <select id="date-filter" name="date">
+          <option th:value="NONE" th:selected="${selectedDate == 'NONE'}">날짜 선택</option>
+          <option th:value="DAY" th:selected="${selectedDate == 'DAY'}">오늘</option>
+          <option th:value="WEEK" th:selected="${selectedDate == 'WEEK'}">이번 주</option>
+          <option th:value="MONTH" th:selected="${selectedDate == 'MONTH'}">이번 달</option>
+          <option th:value="YEAR" th:selected="${selectedDate == 'YEAR'}">올해</option>
+        </select>
+        <select name="category">
+          <option th:value="NONE" th:selected="${selectedCategory == 'NONE'}">카테고리 선택</option>
+          <option th:value="ELECTRONICS" th:selected="${selectedCategory == 'ELECTRONICS'}">전자기기</option>
+          <option th:value="CLOTHING" th:selected="${selectedCategory == 'CLOTHING'}">의류/잡화</option>
+          <option th:value="CARD" th:selected="${selectedCategory == 'CARD'}">신분증/카드</option>
+          <option th:value="BOOK" th:selected="${selectedCategory == 'BOOK'}">서류/책</option>
+          <option th:value="ETC" th:selected="${selectedCategory == 'ETC'}">기타</option>
+        </select>
+        <input type="text" placeholder="분실장소 입력" name="place"/>
+        <select name="status">
+          <option>상태</option>
+          <option>진행중</option>
+          <option>완료</option>
+        </select>
+      </div>
     </form>
-    <div class="search-filters">
-      <select id="date-filter">
-        <option>날짜별</option>
-        <option>오늘</option>
-        <option>이번주</option>
-        <option>이번달</option>
-        <option>올해</option>
-      </select>
-      <select>
-        <option>카테고리</option>
-        <option>전자기기</option>
-        <option>의류/잡화</option>
-        <option>신분증/카드</option>
-        <option>서류/책</option>
-        <option>기타</option>
-      </select>
-      <input type="text" placeholder="분실장소 직접입력" />
-      <select>
-        <option>상태</option>
-        <option>진행중</option>
-        <option>완료</option>
-      </select>
-    </div>
   </div>
   <div class="list-card">
     <div class="lost-list">

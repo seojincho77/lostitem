@@ -1,13 +1,13 @@
 package com.example.lostitem.services;
 
-import com.example.lostitem.models.Post;
-import com.example.lostitem.models.PostType;
-import com.example.lostitem.models.Users;
+import com.example.lostitem.models.*;
 import com.example.lostitem.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -35,6 +35,58 @@ public class PostService {
 
     public List<Post> getPostsByUser(Users user) {
         return postRepository.findByUser(user);
+    }
+
+    public List<Post> getFilteredLostPosts(DateType date, CategoryType category, String keyword, String place, PostType postType) {
+        List<Post> lostPosts = postRepository.findByPostType(postType);
+
+        return lostPosts.stream()
+                .filter(post -> {
+                    LostItem lostItem = post.getLostItem();
+                    boolean match = true;
+
+                    if (category != CategoryType.NONE) {
+                        match &= lostItem.getCategory() == category;
+                    }
+
+                    if (date != DateType.NONE) {
+                        LocalDate lostDate = lostItem.getLostDate();
+                        LocalDate now = LocalDate.now();
+
+                        switch (date) {
+                            case DAY -> match &= lostDate.equals(now);
+                            case WEEK -> match &= lostDate.isAfter(now.minusDays(7));
+                            case MONTH -> match &= lostDate.isAfter(now.minusDays(30));
+                            case YEAR -> match &= lostDate.isAfter(now.minusDays(365));
+                        }
+                    }
+
+                    if (keyword != null && !keyword.trim().isEmpty()) {
+                        String lowerKeyword = keyword.toLowerCase();
+                        String title = post.getTitle() != null ? post.getTitle().toLowerCase() : "";
+
+                        match &= title.contains(lowerKeyword);
+                    }
+                    if(postType == PostType.lost) {
+                        if (place != null && !place.trim().isEmpty()) {
+                            String lowerPlace = place.toLowerCase();
+                            String lostPlace = lostItem.getLostPlace() != null ? lostItem.getLostPlace().toLowerCase() : "";
+
+                            match &= lostPlace.contains(lowerPlace);
+                        }
+                    }else if(postType == PostType.found) {
+                        if (place != null && !place.trim().isEmpty()) {
+                            String lowerPlace = place.toLowerCase();
+                            String lostPlace = post.getFoundPlace() != null ? post.getFoundPlace().toLowerCase() : "";
+
+                            match &= lostPlace.contains(lowerPlace);
+                        }
+                    }
+
+                    return match;
+
+                })
+                .collect(Collectors.toList());
     }
 
     public Post savePost(Post post) {

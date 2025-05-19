@@ -9,5 +9,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
 public enum DateType {
-    DAY, WEEK, MONTH, YEAR;
+    NONE, DAY, WEEK, MONTH, YEAR;
 }

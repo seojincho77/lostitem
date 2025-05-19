@@ -23,7 +23,7 @@ public class FindController {
         this.lostItemService = lostItemService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String foundItems(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
@@ -31,7 +31,7 @@ public class FindController {
         List<Post> foundPosts = postService.getFoundPosts();
         model.addAttribute("foundPosts", foundPosts);
         return "get_list";
-    }
+    }*/
 
     @GetMapping("/new")
     public String CreateFoundItem(HttpSession session, Model model) {
@@ -85,13 +85,21 @@ public class FindController {
     }
 
     @GetMapping
-    public String ShowFoundItem(
-            @RequestParam(required = false) DateType date,
-            @RequestParam(required = false) CategoryType category,
+    public String showLostItems(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "NONE") DateType date,
+            @RequestParam(defaultValue = "NONE") CategoryType category,
+            @RequestParam(required = false) String place,
             HttpSession session,
             Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.found);
+
+        model.addAttribute("foundPosts", filteredPosts);
+        model.addAttribute("selectedDate", date.name());
+        model.addAttribute("selectedCategory", category.name());
 
         return "get_list";
     }
