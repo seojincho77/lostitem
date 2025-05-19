@@ -7,10 +7,16 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/found-items")
@@ -48,10 +54,27 @@ public class FindController {
             @RequestParam StorageLocationType storageLocation,
             @RequestParam LocalDate foundDate,
             @RequestParam String description,
+            @RequestParam("image") MultipartFile imageFile,
             HttpSession session,
-            Model model) {
+            Model model) throws IOException {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        String uploadDir = "uploads/images/";
+        String originalFilename = imageFile.getOriginalFilename();
+        String imagePath = null;
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // 파일명 중복 방지를 위해 UUID 사용
+            String savedFilename = UUID.randomUUID() + "_" + originalFilename;
+            Path savePath = Paths.get(uploadDir + savedFilename);
+
+            // 디렉토리 없으면 생성
+            Files.createDirectories(savePath.getParent());
+            imageFile.transferTo(savePath.toFile());
+
+            imagePath = "/uploads/images/" + savedFilename; // 이 경로는 나중에 static 경로와 연결됨
+        }
 
         Post post = new Post();
         post.setTitle(title);
@@ -60,6 +83,7 @@ public class FindController {
         post.setDescription(description);
         post.setUser(user);
         post.setPostType(PostType.found);
+        post.setImageUrl(imagePath);
 
         LostItem lostitem = new LostItem();
         lostitem.setCategory(category);
