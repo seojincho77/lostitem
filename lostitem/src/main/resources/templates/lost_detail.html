@@ -424,19 +424,18 @@
     </div>
     <div class="comment-card">
       <div class="comment-title">댓글</div>
-      <ul class="comment-list" id="comment_list">
-        {% for comment in comments %}
+      <div th:if="${#lists.isEmpty(comments)}">
+        <p>아직 댓글이 없습니다.</p>
+      </div>
+      <ul th:each="comment : ${comments}" class="comment-list">
         <li class="comment-item">
-          <div>
-            <span class="comment-author" id="comment_username_{{comment.id}}">{{comment.username}}</span>
-            <span class="comment-date" id="comment_created_at_{{comment.id}}">{{comment.created_at}}</span>
-          </div>
-          <div class="comment-content" id="comment_content_{{comment.id}}">{{comment.content}}</div>
+          <strong th:text="${comment.user.username}">작성자</strong>
+          <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
+          <p th:text="${comment.content}">댓글 내용</p>
         </li>
-        {% endfor %}
       </ul>
-      <form class="comment-form-row">
-        <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
+      <form class="comment-form-row" method="post" th:action="@{/lost-items/{id}/comments(id=${lostPost.id})}" th:if="${user!=null}">
+        <textarea class="comment-input" placeholder="댓글을 입력하세요..." name="content"></textarea>
         <button type="submit" class="comment-submit-btn">등록</button>
       </form>
     </div>

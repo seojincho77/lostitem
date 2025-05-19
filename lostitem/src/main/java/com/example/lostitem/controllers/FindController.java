@@ -1,6 +1,7 @@
 package com.example.lostitem.controllers;
 
 import com.example.lostitem.models.*;
+import com.example.lostitem.services.CommentService;
 import com.example.lostitem.services.LostItemService;
 import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
@@ -23,10 +24,12 @@ import java.util.UUID;
 public class FindController {
     private final PostService postService;
     private final LostItemService lostItemService;
+    private final CommentService commentService;
 
-    public FindController(PostService postService, LostItemService lostItemService) {
+    public FindController(PostService postService, LostItemService lostItemService,  CommentService commentService) {
         this.postService = postService;
         this.lostItemService = lostItemService;
+        this.commentService = commentService;
     }
 
     /*@GetMapping
@@ -111,8 +114,14 @@ public class FindController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        Optional<Post> post = postService.getPostById(id);
-        model.addAttribute("foundPost", post.orElse(null));
+        Optional<Post> postOpt = postService.getPostById(id);
+        if (postOpt.isPresent()) {
+            Post post = postOpt.get();
+            model.addAttribute("foundPost", post);
+
+            List<Comment> comments = commentService.getCommentsByPost(post);
+            model.addAttribute("comments", comments);  // 댓글 목록 추가
+        }
 
         return "get_detail";
     }
@@ -143,6 +152,24 @@ public class FindController {
         model.addAttribute("user", user);
 
         postService.toggleIsRecovered(id);
+        return "redirect:/found-items/" + id;
+    }
+
+    @PostMapping("/{id}/comments")
+    public String updateFoundComments(
+            @PathVariable int id,
+            @RequestParam("content") String content,
+            HttpSession session,
+            Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        Comment comment = new Comment();
+        comment.setContent(content);
+        comment.setUser(user);
+        comment.setPost(postService.getPostById(id).get());
+        commentService.saveComment(comment);
+
         return "redirect:/found-items/" + id;
     }
 }

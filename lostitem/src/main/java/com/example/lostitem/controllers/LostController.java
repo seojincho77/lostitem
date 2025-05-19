@@ -1,6 +1,7 @@
 package com.example.lostitem.controllers;
 
 import com.example.lostitem.models.*;
+import com.example.lostitem.services.CommentService;
 import com.example.lostitem.services.LostItemService;
 import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
@@ -24,10 +25,12 @@ import java.util.UUID;
 public class LostController {
     private final PostService postService;
     private final LostItemService lostItemService;
+    private final CommentService commentService;
 
-    public LostController(PostService postService, LostItemService lostItemService) {
+    public LostController(PostService postService, LostItemService lostItemService, CommentService commentService) {
         this.postService = postService;
         this.lostItemService = lostItemService;
+        this.commentService = commentService;
     }
 
     /*@GetMapping
@@ -110,8 +113,14 @@ public class LostController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        Optional<Post> post = postService.getPostById(id);
-        model.addAttribute("lostPost", post.orElse(null));
+        Optional<Post> postOpt = postService.getPostById(id);
+        if (postOpt.isPresent()) {
+            Post post = postOpt.get();
+            model.addAttribute("lostPost", post);
+
+            List<Comment> comments = commentService.getCommentsByPost(post);
+            model.addAttribute("comments", comments);  // 댓글 목록 추가
+        }
 
         return "lost_detail";
     }
@@ -142,6 +151,24 @@ public class LostController {
         model.addAttribute("user", user);
 
         postService.toggleIsRecovered(id);
+        return "redirect:/lost-items/" + id;
+    }
+
+    @PostMapping("/{id}/comments")
+    public String updateLostComments(
+            @PathVariable int id,
+            @RequestParam("content") String content,
+            HttpSession session,
+            Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        Comment comment = new Comment();
+        comment.setContent(content);
+        comment.setUser(user);
+        comment.setPost(postService.getPostById(id).get());
+        commentService.saveComment(comment);
+
         return "redirect:/lost-items/" + id;
     }
 }

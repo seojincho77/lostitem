@@ -159,7 +159,34 @@
       background: #eebbc3;
       color: #232946;
     }
+    .user-info {
+      position: absolute;
+      top: 0.7rem;
+      right: 1.2rem;
+      background: none;
+      color: #393e6e;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin: 0;
+      padding: 0;
+      z-index: 30;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .user-info span {
+      color: #393e6e;
+      font-weight: 700;
+      font-size: 1em;
+    }
 
+    @media (max-width: 900px) {
+      .user-info {
+        top: 1.2rem;
+        right: 0.7rem;
+        font-size: 0.93rem;
+      }
+    }
     @media (max-width: 900px) {
       .sidebar {
         display: none;
@@ -185,6 +212,9 @@
     </nav>
   </aside>
   <main class="main">
+    <div class="user-info" th:if="${user != null}">
+      <span th:text="'환영합니다, ' + ${user.username}"></span>
+    </div>
     <div class="headline">최근 등록된 분실/습득물</div>
     <section class="list-section">
       <table class="item-list" id="item-list">
