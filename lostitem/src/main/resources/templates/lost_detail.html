@@ -81,15 +81,18 @@
     }
 
     .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 2rem 2.5rem 1.2rem 2.5rem;
       border-bottom: 1.5px solid #ececec;
     }
 
     .detail-title {
-      font-size: 1.55rem;
-      font-weight: 800;
+      font-size: 1.4em;
+      font-weight: bold;
       color: #232946;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0;
     }
 
     .badge {
@@ -400,6 +403,7 @@
         <div class="detail-title" id="title">{{post.title}}</div>
         <button type="button" class="edit-btn">수정</button>
       </div>
+
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
           <img src="{{post.image_url}}" alt="이미지">
