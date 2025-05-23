@@ -96,6 +96,11 @@
       margin-bottom: 0;
     }
 
+    .detail-actions {
+      display: flex;
+      gap: 0.7em;
+    }
+
     .badge {
       display: inline-block;
       padding: 0.37em 1.3em;
@@ -348,6 +353,26 @@
       transform: scale(1.04);
     }
 
+    .delete-btn {
+      background: #f67280;
+      color: #232946;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 1.3em;
+      font-size: 1em;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(246, 114, 128, 0.10);
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .delete-btn:hover {
+      background: #c0392b;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(246, 114, 128, 0.20);
+      transform: scale(1.04);
+    }
 
     @media (max-width: 900px) {
       .sidebar {
@@ -403,7 +428,10 @@
     <div class="detail-card">
       <div class="detail-header">
         <div class="detail-title" id="title">{{post.title}}</div>
-        <button type="button" class="edit-btn">수정</button>
+        <div class="detail-actions">
+          <button type="button" class="edit-btn">수정</button>
+          <button type="button" class="delete-btn">삭제</button>
+        </div>
       </div>
 
       <div class="detail-main">
