@@ -411,76 +411,80 @@
   <aside class="sidebar">
     <div class="logo">Lost&Found</div>
     <nav>
-      <a href="main.html">홈</a>
-      <a href="lost_list.html">분실물 목록</a>
-      <a href="get_list.html">습득물 목록</a>
-      <a href="login.html">로그인</a>
-      <a href="signup.html">회원가입</a>
+      <a th:href="@{/}">홈</a>
+      <a th:href="@{/lost-items}">분실물 목록</a>
+      <a th:href="@{/found-items}">습득물 목록</a>
+      <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+      <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+      <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
     </nav>
   </aside>
   <div class="main-area">
     <div class="detail-card">
       <div class="detail-header">
-        <div class="detail-title" id="title">{{post.title}}</div>
+        <div class="detail-title" id="title" th:text="${lostPost.title}">{{post.title}}</div>
         <div class="detail-actions">
           <button type="button" class="edit-btn">수정</button>
           <button type="button" class="delete-btn">삭제</button>
         </div>
       </div>
-
       <div class="detail-main">
         <div class="detail-img-area" id="image_url">
-          <img src="{{post.image_url}}" alt="이미지">
+          <img class="detail-img-area" th:src="@{${lostPost.imageUrl}}" alt="이미지">
         </div>
         <div class="detail-info-list">
           <div class="detail-info-item">
             <div class="detail-info-label">분실일</div>
-            <div class="detail-info-value" id="lost_date">{{lost_item.lost_date}}</div>
+            <div class="detail-info-value" id="lost_date" th:text="${lostPost.lostItem.lostDate}">{{lost_item.lost_date}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">카테고리</div>
-            <div class="detail-info-value" id="category_id">{{category_name}}</div>
+            <div class="detail-info-value" id="category_id" th:text="${lostPost.lostItem.category}">{{category_name}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">분실장소</div>
-            <div class="detail-info-value" id="lost_place">{{lost_item.lost_place}}</div>
+            <div class="detail-info-value" id="lost_place" th:text="${lostPost.lostItem.lostPlace}">{{lost_item.lost_place}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">신고자</div>
-            <div class="detail-info-value" id="username">{{user.username}}</div>
+            <div class="detail-info-value" id="username" th:text="${lostPost.user.username}">{{user.username}}</div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-label">상태</div>
             <div class="detail-info-value">
-              <span class="badge" id="is_recovered">{{post.is_recovered ? '진행중' : '완료'}}</span>
-              <button type="button" class="status-toggle-btn">상태 변경</button>
+              <span class="badge" id="is_recovered" th:text="${lostPost.isRecovered?'완료':'진행중'}"></span>
+              <form th:action="@{/lost-items/{id}/status(id=${lostPost.id})}" method="post"
+                    th:if="${user != null and user.id == lostPost.user.id}">
+                <button type="submit" class="status-toggle-btn">상태 변경</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
       <div class="detail-desc-wrap">
         <div class="detail-desc-title">상세 설명</div>
-        <div class="detail-desc" id="description">{{post.description}}</div>
+        <div class="detail-desc" id="description" th:text="${lostPost.description}">{{post.description}}</div>
       </div>
       <div class="back-btn-row">
-        <button class="back-btn" onclick="history.back()">목록으로</button>
+        <form th:action="@{/}" method="get">
+          <button class="back-btn">목록으로</button>
+        </form>
       </div>
     </div>
     <div class="comment-card">
       <div class="comment-title">댓글</div>
-      <ul class="comment-list" id="comment_list">
-        {% for comment in comments %}
+      <div th:if="${#lists.isEmpty(comments)}">
+        <p>아직 댓글이 없습니다.</p>
+      </div>
+      <ul th:each="comment : ${comments}" class="comment-list">
         <li class="comment-item">
-          <div>
-            <span class="comment-author" id="comment_username_{{comment.id}}">{{comment.username}}</span>
-            <span class="comment-date" id="comment_created_at_{{comment.id}}">{{comment.created_at}}</span>
-          </div>
-          <div class="comment-content" id="comment_content_{{comment.id}}">{{comment.content}}</div>
+          <strong th:text="${comment.user.username}">작성자</strong>
+          <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
+          <p th:text="${comment.content}">댓글 내용</p>
         </li>
-        {% endfor %}
       </ul>
-      <form class="comment-form-row">
-        <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
+      <form class="comment-form-row" method="post" th:action="@{/lost-items/{id}/comments(id=${lostPost.id})}" th:if="${user!=null}">
+        <textarea class="comment-input" placeholder="댓글을 입력하세요..." name="content"></textarea>
         <button type="submit" class="comment-submit-btn">등록</button>
       </form>
     </div>
