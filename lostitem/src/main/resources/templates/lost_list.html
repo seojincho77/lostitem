@@ -495,7 +495,7 @@
     </div>
     <div class="search-card">
       <form class="search-bar" autocomplete="off" method="get" th:action="@{/lost-items}">
-        <input type="text" placeholder="분실물을 검색하세요..." name="keyword" />
+        <input type="text" placeholder="분실물을 검색하세요..." name="keyword" th:value="${keyword}"/>
         <button type="submit">검색</button>
         <div class="search-filters">
           <select id="date-filter" name="date">
@@ -513,11 +513,11 @@
             <option th:value="BOOK" th:selected="${selectedCategory == 'BOOK'}">서류/책</option>
             <option th:value="ETC" th:selected="${selectedCategory == 'ETC'}">기타</option>
           </select>
-          <input type="text" placeholder="분실장소 입력" name="place" />
+          <input type="text" placeholder="분실장소 입력" name="place" th:value="${place}"/>
           <select name="status">
-            <option>상태</option>
-            <option>진행중</option>
-            <option>완료</option>
+            <option th:value="NONE" th:selected="${status == 'NONE'}">상태</option>
+            <option th:value="PROCESSING" th:selected="${status == 'PROCESSING'}">진행중</option>
+            <option th:value="DONE" th:selected="${status == 'DONE'}">완료</option>
           </select>
         </div>
       </form>

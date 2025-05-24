@@ -131,16 +131,20 @@ public class LostController {
             @RequestParam(defaultValue = "NONE") DateType date,
             @RequestParam(defaultValue = "NONE") CategoryType category,
             @RequestParam(required = false) String place,
+            @RequestParam(defaultValue = "NONE") StatusType status,
             HttpSession session,
             Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.lost);
+        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.lost, status);
 
         model.addAttribute("lostPosts", filteredPosts);
+        model.addAttribute("keyword",keyword);
         model.addAttribute("selectedDate", date.name());
         model.addAttribute("selectedCategory", category.name());
+        model.addAttribute("place", place);
+        model.addAttribute("status", status.name());
 
         return "lost_list";
     }

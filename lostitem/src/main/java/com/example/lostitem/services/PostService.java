@@ -38,7 +38,7 @@ public class PostService {
         return postRepository.findByUser(user);
     }
 
-    public List<Post> getFilteredLostPosts(DateType date, CategoryType category, String keyword, String place, PostType postType) {
+    public List<Post> getFilteredLostPosts(DateType date, CategoryType category, String keyword, String place, PostType postType, StatusType status) {
         List<Post> lostPosts = postRepository.findByPostType(postType);
 
         return lostPosts.stream()
@@ -68,6 +68,17 @@ public class PostService {
 
                         match &= title.contains(lowerKeyword);
                     }
+
+                    if (status != StatusType.NONE) {
+                        boolean isRecovered = post.getIsRecovered() != null && post.getIsRecovered();
+
+                        if (status == StatusType.PROCESSING) {
+                            match &= !isRecovered;
+                        } else if (status == StatusType.DONE) {
+                            match &= isRecovered;
+                        }
+                    }
+
                     if(postType == PostType.lost) {
                         if (place != null && !place.trim().isEmpty()) {
                             String lowerPlace = place.toLowerCase();
