@@ -176,4 +176,17 @@ public class FindController {
 
         return "redirect:/found-items/" + id;
     }
+
+    @PostMapping("/{id}/delete")
+    public String deleteFoundPost(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        Optional<Post> post = postService.getPostById(id);
+        if (post.isPresent()) {
+            postService.deletePost(id);
+        }
+
+        return "redirect:/found-items";
+    }
 }

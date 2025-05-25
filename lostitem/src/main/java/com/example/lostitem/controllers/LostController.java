@@ -175,4 +175,17 @@ public class LostController {
 
         return "redirect:/lost-items/" + id;
     }
+
+    @PostMapping("/{id}/delete")
+    public String deleteLostItem(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        Optional<Post> post = postService.getPostById(id);
+        if (post.isPresent()) {
+            postService.deletePost(id);
+        }
+
+        return "redirect:/lost-items";
+    }
 }

@@ -423,9 +423,14 @@
     <div class="detail-card">
       <div class="detail-header">
         <div class="detail-title" id="title" th:text="${lostPost.title}">{{post.title}}</div>
-        <div class="detail-actions">
-          <button type="button" class="edit-btn">수정</button>
-          <button type="button" class="delete-btn">삭제</button>
+        <div class="detail-actions" th:if="${user != null and user.id == lostPost.user.id}">
+          <form th:action="@{/lost-items/{id}/edit(id=${lostPost.id})}" method="get" style="display:inline;">
+            <button type="submit" class="edit-btn">수정</button>
+          </form>
+          <form th:action="@{/lost-items/{id}/delete(id=${lostPost.id})}" method="post" style="display:inline;"
+                onsubmit="return confirm('정말 삭제하시겠습니까?');">
+            <button type="submit" class="delete-btn">삭제</button>
+          </form>
         </div>
       </div>
       <div class="detail-main">
