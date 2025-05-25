@@ -189,4 +189,13 @@ public class FindController {
 
         return "redirect:/found-items";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editFoundPost(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        Optional<Post> post = postService.getPostById(id);
+        model.addAttribute("foundPost", post);
+        return "get_edit";
+    }
 }

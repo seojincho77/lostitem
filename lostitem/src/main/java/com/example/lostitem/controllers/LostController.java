@@ -188,4 +188,13 @@ public class LostController {
 
         return "redirect:/lost-items";
     }
+
+    @GetMapping("/{id}/edit")
+    public String showEditLostItem(HttpSession session, @PathVariable int id, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        Optional<Post> post = postService.getPostById(id);
+        model.addAttribute("lostPost", post);
+        return "lost_edit";
+    }
 }

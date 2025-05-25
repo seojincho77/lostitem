@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>분실물 등록</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f6f8fd;
+      color: #232946;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #232946;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 0 1rem 0;
+      min-height: 100vh;
+    }
+
+    .sidebar .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 2.5rem;
+      color: #eebbc3;
+      letter-spacing: 1px;
+    }
+
+    .sidebar nav {
+      width: 100%;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: #eebbc3;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      border-radius: 8px 0 0 8px;
+      transition: background 0.13s;
+    }
+
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #393e6e;
+      color: #fff;
+    }
+
+    .main-area {
+      flex: 1;
+      background: #f6f8fd;
+      min-width: 0;
+      padding: 0 0 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+
+    .main-header {
+      width: 100%;
+      max-width: 1100px;
+      padding: 2.5rem 2.5rem 0 2.5rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.6rem;
+      box-sizing: border-box;
+    }
+
+    .main-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #232946;
+      letter-spacing: 1px;
+      margin-left: 0.2rem;
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(184, 193, 236, 0.13);
+      padding: 2.1rem 2.5rem 2.1rem 2.5rem;
+      width: calc(100% - 5rem);
+      max-width: 600px;
+      min-width: 320px;
+      margin: 0 auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 700;
+      color: #232946;
+      margin-bottom: 0.6rem;
+      font-size: 1.08rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: inherit;
+      font-size: 1.08rem;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid #b8c1ec;
+      border-radius: 9px;
+      background: #f4f6fa;
+      color: #232946;
+      outline: none;
+      transition: border 0.15s, background 0.15s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #eebbc3;
+      background: #fff;
+    }
+
+    .form-group input[type="date"] {
+      min-width: 140px;
+    }
+
+    .form-group textarea {
+      min-height: 80px;
+      max-height: 180px;
+    }
+
+    .form-btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .submit-btn,
+    .cancel-btn {
+      padding: 0.85em 2.2em;
+      font-size: 1.13rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+    }
+
+    .submit-btn {
+      background: #b8c1ec;
+      color: #232946;
+    }
+
+    .submit-btn:hover {
+      background: #232946;
+      color: #fff;
+    }
+
+    .cancel-btn {
+      background: #ececec;
+      color: #232946;
+    }
+
+    .cancel-btn:hover {
+      background: #eebbc3;
+      color: #232946;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main-area {
+        padding: 0 0 2rem 0;
+      }
+
+      .main-header,
+      .form-card {
+        max-width: 98vw;
+        width: 98vw;
+      }
+
+      .form-card {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .main-header,
+      .form-card {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+
+      .form-card {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<aside class="sidebar">
+  <div class="logo">Lost&Found</div>
+  <nav>
+    <a th:href="@{/}">홈</a>
+    <a th:href="@{/lost-items}">분실물 목록</a>
+    <a th:href="@{/found-items}">습득물 목록</a>
+    <a th:href="@{/login}" th:if="${user == null}">로그인</a>
+    <a th:href="@{/register}" th:if="${user == null}">회원가입</a>
+    <a th:href="@{/logout}" th:if="${user != null}">로그아웃</a>
+  </nav>
+</aside>
+<div class="main-area">
+  <div class="main-header">
+    <div class="main-title">분실물 등록</div>
+  </div>
+  <div class="form-card">
+    <form method="post" action="/lost-items/new" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="item-name">분실물명</label>
+        <input type="text" id="item-name" name="title" placeholder="예) 지갑, 노트북" required>
+      </div>
+      <div class="form-group">
+        <label for="category">카테고리</label>
+        <select id="category" name="category" required>
+          <option value="">카테고리 선택</option>
+          <option value="ELECTRONICS">전자기기</option>
+          <option value="CLOTHING">의류/잡화</option>
+          <option value="CARD">신분증/카드</option>
+          <option value="BOOK">서류/책</option>
+          <option value="ETC">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lost-location">분실 장소</label>
+        <input type="text" id="lost-location" name="lostPlace" placeholder="예) 도서관 2층, 학생식당" required>
+      </div>
+      <div class="form-group">
+        <label for="lost-date">분실일</label>
+        <input type="date" id="lost-date" name="lostDate" required>
+      </div>
+      <div class="form-group">
+        <label for="image">이미지 첨부</label>
+        <input type="file" id="image" name="image" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="desc">특이사항/분실물 특징</label>
+        <textarea id="desc" name="description" rows="3" placeholder="분실물의 특징 등"></textarea>
+      </div>
+      <div class="form-btn-row">
+        <button type="submit" class="submit-btn">등록하기</button>
+        <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>
