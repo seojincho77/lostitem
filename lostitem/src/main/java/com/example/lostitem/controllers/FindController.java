@@ -195,7 +195,71 @@ public class FindController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
         Optional<Post> post = postService.getPostById(id);
-        model.addAttribute("foundPost", post);
+        if (post.isPresent()) {
+            model.addAttribute("foundPost", post);
+        }
         return "get_edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateFoundPost(@PathVariable int id,
+                                  @RequestParam String title,
+                                  @RequestParam CategoryType category,
+                                  @RequestParam String foundPlace,
+                                  @RequestParam StorageLocationType storageLocation,
+                                  @RequestParam LocalDate foundDate,
+                                  @RequestParam String description,
+                                  @RequestParam("image") MultipartFile imageFile,
+                                  HttpSession session,
+                                  Model model) throws IOException {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        Optional<Post> optPost = postService.getPostById(id);
+        Post post = optPost.get();
+
+        String imagePath = null;
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String originalFilename = imageFile.getOriginalFilename();
+            String savedFilename = UUID.randomUUID() + "_" + originalFilename;
+
+            System.out.println("originalFilename: " + imageFile.getOriginalFilename());
+            System.out.println("UUID: " + UUID.randomUUID());
+
+            // 절대 경로로 저장
+            String uploadDir = System.getProperty("user.dir") + "/images/";
+            Path uploadPath = Paths.get(uploadDir);
+
+// 디렉토리가 없으면 생성
+            Files.createDirectories(uploadPath);
+
+// 파일 저장
+            Path savePath = uploadPath.resolve(savedFilename);
+            imageFile.transferTo(savePath.toFile());
+
+            System.out.println("Save path: " + savePath.toString());
+            // 웹에서 접근 가능한 경로로 설정
+            imagePath = "/images/" + savedFilename;
+
+            post.setImageUrl(imagePath);
+        }
+
+        post.setTitle(title);
+        post.setFoundPlace(foundPlace);
+        post.setStorageLocation(storageLocation);
+        post.setDescription(description);
+        post.setUser(user);
+        post.setPostType(PostType.found);
+
+        LostItem lostitem = post.getLostItem();
+        lostitem.setCategory(category);
+        lostitem.setLostDate(foundDate);
+
+        lostitem.setPost(post);
+        post.setLostItem(lostitem);
+
+        postService.savePost(post);
+
+        return "redirect:/found-items";
     }
 }
