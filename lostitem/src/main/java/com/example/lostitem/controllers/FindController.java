@@ -209,7 +209,7 @@ public class FindController {
         model.addAttribute("user", user);
         Optional<Post> post = postService.getPostById(id);
         if (post.isPresent()) {
-            model.addAttribute("foundPost", post);
+            model.addAttribute("foundPost", post.get());
         }
         return "get_edit";
     }

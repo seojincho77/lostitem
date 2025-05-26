@@ -571,7 +571,7 @@
                 <li>
                     <button
                             th:disabled="${currentPage == 0}"
-                            th:onclick="|goToPage(${currentPage-1})|">
+                            th:onclick="|location.href='/found-items?page=${currentPage - 1}'|">
                         &lt;
                     </button>
                 </li>
@@ -580,25 +580,19 @@
                     <button
                             th:classappend="${i == currentPage} ? 'active'"
                             th:text="${i + 1}"
-                            th:onclick="|goToPage(${i})|">
+                            th:onclick="|location.href='/found-items?page=${i}'|">
                     </button>
                 </li>
 
                 <li>
                     <button
                             th:disabled="${currentPage + 1 >= totalPages}"
-                            th:onclick="|goToPage(${currentPage+1})|">
+                            th:onclick="|location.href='/found-items?page=${currentPage + 1}'|">
                         &gt;
                     </button>
                 </li>
             </ul>
         </div>
-        <script>
-            function goToPage(pageNumber) {
-                document.getElementById('pageInput').value = pageNumber;
-                document.getElementById('searchForm').submit();
-            }
-        </script>
     </div>
 </body>
 
