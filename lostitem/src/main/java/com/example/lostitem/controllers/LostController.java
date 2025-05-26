@@ -64,6 +64,11 @@ public class LostController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
+        if (lostDate.isAfter(LocalDate.now())) {
+            model.addAttribute("error", "날짜가 오늘보다 미래일 수 없습니다.");
+            return "lost_registeration"; // ← 폼 페이지의 템플릿 이름으로 교체
+        }
+
         String imagePath = null;
 
         if (imageFile != null && !imageFile.isEmpty()) {
