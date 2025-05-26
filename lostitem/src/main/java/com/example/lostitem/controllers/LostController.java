@@ -261,4 +261,14 @@ public class LostController {
         return "redirect:/lost-items";
 
     }
+
+    @GetMapping("/comments/{id}/delete")
+    public String deleteLostComment(@PathVariable int id, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        Optional<Comment> comment = commentService.getCommentById(id);
+        Integer postId = comment.get().getPost().getId(); //redirection용
+        commentService.deleteComment(id);
+        return "redirect:/lost-items/" + postId;
+    }
 }

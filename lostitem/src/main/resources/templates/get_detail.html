@@ -504,8 +504,8 @@
           <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
           <span class="comment-actions"
                 th:if="${user != null and user.id == comment.user.id}">
-            <a th:href="@{/{id}/comments/edit(id=${comment.id})}">수정</a>
-            <a th:href="@{/{id}/comments/delete(id=${comment.id})}"
+            <a th:href="@{/found-items/comments/{id}/edit(id=${comment.id})}">수정</a>
+            <a th:href="@{/found-items/comments/{id}/delete(id=${comment.id})}"
                onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
           </span>
           <p th:text="${comment.content}">댓글 내용</p>
