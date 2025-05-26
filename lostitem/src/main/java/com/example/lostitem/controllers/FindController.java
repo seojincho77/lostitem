@@ -272,4 +272,14 @@ public class FindController {
         commentService.deleteComment(id);
         return "redirect:/found-items/" + postId;
     }
+
+    @PostMapping("/comments/{id}/edit")
+    public String updateLostComment(@PathVariable int id, @RequestParam String content, HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        Comment comment = commentService.getCommentById(id).get();
+        comment.setContent(content);
+        commentService.saveComment(comment);
+        return "redirect:/found-items/" + comment.getPost().getId();
+    }
 }
