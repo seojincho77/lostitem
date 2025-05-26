@@ -232,7 +232,7 @@
         <div class="main-title">습득물 등록</div>
     </div>
     <div class="form-card">
-        <form th:action="@{/lost-items/{id}/edit(id=${foundPost.id})}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/found-items/{id}/edit(id=${foundPost.id})}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">습득물명</label>
                 <input type="text" id="title" name="title" placeholder="예) 지갑, 노트북"
