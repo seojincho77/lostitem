@@ -11,5 +11,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     List<Comment> findByPost(Post post);
 
     // 게시글 기준으로 최신순 정렬 (createdAt 내림차순)
-    List<Comment> findByPostOrderByCreatedAtDesc(Post post);
+    List<Comment> findByPostOrderByCreatedAtAsc(Post post);
 }

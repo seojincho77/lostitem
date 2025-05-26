@@ -18,7 +18,7 @@ public class CommentService {
     }
 
     public List<Comment> getCommentsByPost(Post post) {
-        return commentRepository.findByPostOrderByCreatedAtDesc(post);
+        return commentRepository.findByPostOrderByCreatedAtAsc(post);
     }
 
     public Comment saveComment(Comment comment) {
