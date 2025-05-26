@@ -241,7 +241,7 @@
       <div class="form-group">
         <label for="category">카테고리</label>
         <select id="category" name="category" required>
-          <option th:value="NONE" th:selected="${lostPost.lostItem.category == 'NONE'}">카테고리 선택</option>
+          <option value="">카테고리 선택</option>
           <option th:value="ELECTRONICS" th:selected="${lostPost.lostItem.category == 'ELECTRONICS'}">전자기기</option>
           <option th:value="CLOTHING" th:selected="${lostPost.lostItem.category == 'CLOTHING'}">의류/잡화</option>
           <option th:value="CARD" th:selected="${lostPost.lostItem.category == 'CARD'}">신분증/카드</option>
