@@ -404,6 +404,13 @@
         height: 180px;
       }
     }
+    .comment-actions a {
+      margin-left: 8px;
+      color: #888;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 
@@ -485,6 +492,12 @@
         <li class="comment-item">
           <strong th:text="${comment.user.username}">작성자</strong>
           <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
+          <span class="comment-actions"
+                th:if="${user != null and user.id == comment.user.id}">
+            <a th:href="@{/comments/{id}/edit(id=${comment.id})}">수정</a>
+            <a th:href="@{/comments/{id}/delete(id=${comment.id})}"
+               onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
+          </span>
           <p th:text="${comment.content}">댓글 내용</p>
         </li>
       </ul>
