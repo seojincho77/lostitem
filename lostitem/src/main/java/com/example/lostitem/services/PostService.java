@@ -22,6 +22,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<Post> getRecentPosts() {
+        return postRepository.findTop7ByOrderByCreatedAtDesc();
+    }
+
     public List<Post> getLostPosts() {
         return postRepository.findByPostType(PostType.lost);
     }

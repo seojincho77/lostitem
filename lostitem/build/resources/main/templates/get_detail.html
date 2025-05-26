@@ -503,14 +503,25 @@
           <strong th:text="${comment.user.username}">작성자</strong>
           <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
           <span class="comment-actions"
-                th:if="${user != null and user.id == comment.user.id}">
-            <a th:href="@{/found-items/comments/{id}/edit(id=${comment.id})}">수정</a>
+                th:if="${user != null and user.id == comment.user.id}" style="float: right;">
+            <a href="javascript:void(0);" th:onclick="'showEditForm(' + ${comment.id} + ')'">수정</a>
             <a th:href="@{/found-items/comments/{id}/delete(id=${comment.id})}"
                onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
           </span>
-          <p th:text="${comment.content}">댓글 내용</p>
+          <p th:text="${comment.content}" th:id="'comment-text-' + ${comment.id}"></p>
+
+          <form th:action="@{/found-items/comments/{id}/edit(id=${comment.id})}" method="post" th:id="'comment-form-' + ${comment.id}" style="display:none;">
+            <textarea name="content" th:text="${comment.content}"></textarea>
+            <button type="submit">저장</button>
+          </form>
         </li>
       </ul>
+      <script>
+        function showEditForm(commentId) {
+          document.getElementById('comment-text-' + commentId).style.display = 'none';
+          document.getElementById('comment-form-' + commentId).style.display = 'block';
+        }
+      </script>
       <form class="comment-form-row" method="post" th:action="@{/found-items/{id}/comments(id=${foundPost.id})}" th:if="${user!=null}">
         <textarea class="comment-input" placeholder="댓글을 입력하세요..." name="content"></textarea>
         <button type="submit" class="comment-submit-btn">등록</button>

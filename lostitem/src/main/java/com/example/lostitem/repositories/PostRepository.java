@@ -12,6 +12,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findByPostType(PostType postType);
 
+    List<Post> findTop7ByOrderByCreatedAtDesc();
+
     // 사용자 ID로 게시글 찾기
     List<Post> findByUser_Id(Integer userId);
 

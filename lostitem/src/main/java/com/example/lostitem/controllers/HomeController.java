@@ -24,7 +24,7 @@ public class HomeController {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user); // 세션에서 사용자 정보를 model에 추가
 
-        List<Post> posts = postService.getAllPosts();
+        List<Post> posts = postService.getRecentPosts();
         model.addAttribute("posts", posts);
         model.addAttribute("found", PostType.found);
         return "main"; // home.html 파일 반환
