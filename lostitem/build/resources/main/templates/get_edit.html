@@ -232,7 +232,7 @@
         <div class="main-title">습득물 등록</div>
     </div>
     <div class="form-card">
-        <form th:action="@{/lost-items/{id}/edit(id=${foundPost.id})}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/found-items/{id}/edit(id=${foundPost.id})}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">습득물명</label>
                 <input type="text" id="title" name="title" placeholder="예) 지갑, 노트북"
@@ -257,7 +257,7 @@
             <div class="form-group">
                 <label for="storage_location_id">보관장소</label>
                 <select id="storage_location_id" name="storageLocation" required>
-                    <option th:value="NONE" th:selected="${foundPost.storageLocation == 'NONE'}">보관장소 선택</option>
+                    <option value="">보관장소 선택</option>
                     <option th:value="CENTER" th:selected="${foundPost.storageLocation == 'CENTER'}">학생지원센터</option>
                     <option th:value="SECURITY" th:selected="${foundPost.storageLocation == 'SECURITY'}">경비실</option>
                     <option th:value="LIBRARY" th:selected="${foundPost.storageLocation == 'LIBRARY'}">도서관 안내데스크</option>

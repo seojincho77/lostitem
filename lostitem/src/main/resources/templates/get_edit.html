@@ -241,7 +241,7 @@
             <div class="form-group">
                 <label for="category_id">카테고리</label>
                 <select id="category_id" name="category" required>
-                    <option th:value="NONE" th:selected="${foundPost.lostItem.category == 'NONE'}">카테고리 선택</option>
+                    <option value="">카테고리 선택</option>
                     <option th:value="ELECTRONICS" th:selected="${foundPost.lostItem.category == 'ELECTRONICS'}">전자기기</option>
                     <option th:value="CLOTHING" th:selected="${foundPost.lostItem.category == 'CLOTHING'}">의류/잡화</option>
                     <option th:value="CARD" th:selected="${foundPost.lostItem.category == 'CARD'}">신분증/카드</option>
@@ -257,7 +257,7 @@
             <div class="form-group">
                 <label for="storage_location_id">보관장소</label>
                 <select id="storage_location_id" name="storageLocation" required>
-                    <option th:value="NONE" th:selected="${foundPost.storageLocation == 'NONE'}">보관장소 선택</option>
+                    <option value="">보관장소 선택</option>
                     <option th:value="CENTER" th:selected="${foundPost.storageLocation == 'CENTER'}">학생지원센터</option>
                     <option th:value="SECURITY" th:selected="${foundPost.storageLocation == 'SECURITY'}">경비실</option>
                     <option th:value="LIBRARY" th:selected="${foundPost.storageLocation == 'LIBRARY'}">도서관 안내데스크</option>

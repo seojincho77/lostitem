@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
 public enum CategoryType {
-    NONE("none"),
+    NONE("카테고리 없음"),
     ELECTRONICS("전자기기"),
     CLOTHING("의류/잡화"),
     CARD("신분증/카드"),
