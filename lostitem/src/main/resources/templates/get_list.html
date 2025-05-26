@@ -495,7 +495,7 @@
             <span th:text="'환영합니다, ' + ${user.username}"></span>
         </div>
         <div class="search-card">
-            <form class="search-bar" autocomplete="off">
+            <form class="search-bar" method="get" th:action="@{/found-items}" autocomplete="off">
                 <input type="text" placeholder="분실물을 검색하세요..." name="keyword" th:value="${keyword}"/>
                 <button type="submit">검색</button>
                 <div class="search-filters">
@@ -566,16 +566,33 @@
                 </div>
             </div>
         </div>
-        <div class="pagination-wrap">
+        <div class="pagination-wrap" th:if="${totalPages > 1}">
             <ul class="pagination">
-                <li><button title="이전 페이지" disabled>&lt;</button></li>
-                <li><button class="active">1</button></li>
-                <li><button>2</button></li>
-                <li><button>3</button></li>
-                <li><button title="다음 페이지">&gt;</button></li>
+                <li>
+                    <button
+                            th:disabled="${currentPage == 0}"
+                            th:onclick="|location.href='/found-items?page=${currentPage - 1}'|">
+                        &lt;
+                    </button>
+                </li>
+
+                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <button
+                            th:classappend="${i == currentPage} ? 'active'"
+                            th:text="${i + 1}"
+                            th:onclick="|location.href='/found-items?page=${i}'|">
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                            th:disabled="${currentPage + 1 >= totalPages}"
+                            th:onclick="|location.href='/found-items?page=${currentPage + 1}'|">
+                        &gt;
+                    </button>
+                </li>
             </ul>
         </div>
-
     </div>
 </body>
 

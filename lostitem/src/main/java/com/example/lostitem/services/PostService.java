@@ -2,6 +2,12 @@ package com.example.lostitem.services;
 
 import com.example.lostitem.models.*;
 import com.example.lostitem.repositories.PostRepository;
+import com.example.lostitem.repositories.PostSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -42,7 +48,7 @@ public class PostService {
         return postRepository.findByUser(user);
     }
 
-    public List<Post> getFilteredLostPosts(DateType date, CategoryType category, String keyword, String place, PostType postType, StatusType status) {
+    /*public List<Post> getFilteredLostPosts(DateType date, CategoryType category, String keyword, String place, PostType postType, StatusType status) {
         List<Post> lostPosts = postRepository.findByPostType(postType);
 
         return lostPosts.stream()
@@ -103,6 +109,20 @@ public class PostService {
 
                 })
                 .collect(Collectors.toList());
+    }*/
+
+    public Page<Post> getFilteredLostPosts(
+            DateType date,
+            CategoryType category,
+            String keyword,
+            String place,
+            PostType type,
+            StatusType status,
+            int page
+    ) {
+        Pageable pageable = PageRequest.of(page, 7, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Specification<Post> spec = PostSpecification.filterPosts(date, category, keyword, place, type, status);
+        return postRepository.findAll(spec, pageable);
     }
 
     public void toggleIsRecovered(Integer postId) {

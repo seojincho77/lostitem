@@ -5,6 +5,7 @@ import com.example.lostitem.services.CommentService;
 import com.example.lostitem.services.LostItemService;
 import com.example.lostitem.services.PostService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,14 +133,21 @@ public class LostController {
             @RequestParam(defaultValue = "NONE") CategoryType category,
             @RequestParam(required = false) String place,
             @RequestParam(defaultValue = "NONE") StatusType status,
+            @RequestParam(defaultValue = "0") int page,
             HttpSession session,
             Model model) {
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.lost, status);
+//        List<Post> filteredPosts = postService.getFilteredLostPosts(date, category, keyword, place, PostType.lost, status);
+        Page<Post> filteredPosts = postService.getFilteredLostPosts(
+                date, category, keyword, place, PostType.lost, status, page
+        );
 
-        model.addAttribute("lostPosts", filteredPosts);
+        model.addAttribute("lostPosts", filteredPosts.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", filteredPosts.getTotalPages());
+
         model.addAttribute("keyword",keyword);
         model.addAttribute("selectedDate", date.name());
         model.addAttribute("selectedCategory", category.name());
